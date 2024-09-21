@@ -1,8 +1,15 @@
-import React from "react";
+import React,{useState} from "react";
 import background from "../assets/background.jpg"
-import hide from "../assets/hide.png"
+
+import {FaEye, FaEyeSlash} from "react-icons/fa";
 
 const SignUp : React.FC = () =>{
+    const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+
+    const handlePassword=() =>{
+        setPasswordVisible(!passwordVisible)
+    }
+
     return (
         <div className="relative w-full min-h-screen font-poppins">
 
@@ -11,21 +18,37 @@ const SignUp : React.FC = () =>{
          <div className="relative z-10 h-screen flex justify-center items-center">
             <div className="bg-white justify-center w-5/12 h-4/6 rounded-2xl shadow-md shadow-gray-600">
                 <div className="flex flex-col h-full justify-center items-center">
-                    <p className="font-slackey text-[36px] mb-8">Sign Up</p>
-                    <input className="border w-4/6 h-[55px] rounded-md border-borderOrange pl-[15px] items-center text-[12px] my-2" 
-                           placeholder="Username"></input>
+                    <p className="font-slackey text-[36px] mb-4">Sign Up</p>
+                       <div className="flex border border-borderOrange rounded-md items-center text-[12px] my-2 pl-[15px]  w-4/6 h-[50px]">
+                            <input 
+                            type="text"
+                            className="border-none outline-none focus-visible:border-none w-4/5" 
+                            placeholder="Username"></input>
+                        </div>
                     <div className="relative w-full flex justify-center">
-                        <input className="border w-4/6 h-[55px] rounded-md border-borderOrange pl-[15px] items-center text-[12px] my-2" 
-                            placeholder="Password">
-                        </input>
-                        <img src={hide} className="absolute right-[165px] top-[30px] w-[13px] h-[13px]" alt="hide"/>
+                        <div className="flex border border-borderOrange rounded-md items-center text-[12px] my-2 pl-[15px]  w-4/6 h-[50px]">
+                            <input 
+                            type={passwordVisible?"text":"password"}
+                            className="border-none outline-none focus-visible:border-none w-4/5" 
+                            placeholder="Password"></input>
+                            <label 
+                            className="ml-[30px]" 
+                            onClick={handlePassword}>{passwordVisible?<FaEye />:<FaEyeSlash/>}</label>
+                        </div>
                     </div>
                     <div className="relative w-full flex justify-center">
-                    <input className="border w-4/6 h-[55px] rounded-md border-borderOrange pl-[15px] items-center text-[12px] my-2" 
-                           placeholder="Confirm Password"></input>
-                    <img src={hide} className="absolute right-[165px] top-[30px] w-[13px] h-[13px]" alt="hide"/>
+                        <div className="flex border border-borderOrange rounded-md items-center text-[12px] my-2 pl-[15px]  w-4/6 h-[50px]">
+                            <input 
+                            type={passwordVisible?"text":"password"}
+                            className="border-none outline-none focus-visible:border-none w-4/5" 
+                            placeholder="Confirm Password"></input>
+                            <label 
+                            className="ml-[30px]" 
+                            onClick={handlePassword}>{passwordVisible?<FaEye />:<FaEyeSlash/>}</label>
+                        </div>
+                    
                     </div>
-                    <button className="mt-7 h-[73px] w-1/3 bg-buttonYellow rounded-full items-center text-[22px] shadow-md shadow-gray-400 "> Create Account</button>
+                    <button className="mt-3 py-2 px-7 bg-buttonYellow rounded-full items-center text-[22px] shadow-md shadow-gray-400 "> Create Account</button>
 
                 </div>
             </div>

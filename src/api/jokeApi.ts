@@ -1,17 +1,34 @@
-import axios from "axios";
 
 export interface Joke {
-    joke: string;
+    content: string;
+    title: string;
     id: number;
+    users_who_liked?: [number];
+    users_who_disliked?: [number]
 }
 
-export const fetchSingleJoke = async (): Promise<Joke> => {
+export const fetchSingleJoke = async (): Promise<[Joke]> => {
     try {
-        const response = await axios.get<Joke>('https://v2.jokeapi.dev/joke/Any?type=single');
-        return response.data;
+        const response = await fetch('https://jokes-backend-11nq.onrender.com/joke');
+        const data = await response.json()
+        console.log(data)
+        return [data];
     }   
     catch (error) {
         console.error('Error fetching single joke', error);
+        throw error;
+    }
+};
+
+export const fetchJokes = async (): Promise<Joke[]> => {
+    try {
+        const response = await fetch('https://jokes-backend-11nq.onrender.com/joke?amount=10');
+        const data = await response.json()
+        console.log(data)
+        return data;
+    }   
+    catch (error) {
+        console.error('Error fetching jokes', error);
         throw error;
     }
 };
