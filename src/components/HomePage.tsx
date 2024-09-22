@@ -14,6 +14,7 @@ const HomePage = () => {
     const [disliked, setDisliked] = useState<Joke[]>([]);
 
     const navigate = useNavigate();
+    
 
     useEffect(() => {
     const loadJoke = async () => {

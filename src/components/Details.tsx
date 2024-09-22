@@ -1,11 +1,45 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import background from "../assets/background.jpg";
 import left from "../assets/left.png";
 import { useLocation } from "react-router-dom";
 
+
+interface JokeDetails {
+    title: string;
+    content: string;
+    id: string;
+    likers: string[]; 
+    dislikers: string[]; 
+}
+
 const Details = () => {
     const location = useLocation();
-    const { title, content } = location.state?.joke || { title: '', content: '' };
+    const joke = location.state?.joke;
+    
+    const [jokeDetails, setJokeDetails] = useState<JokeDetails | null>(null);
+
+    useEffect(() => {
+        const fetchJokeDetails = async () => {
+            if (joke && joke.id) {
+                try {
+                    const response = await fetch(`https://jokes-backend-11nq.onrender.com/joke-details?id=${joke.id}`);
+                    const data = await response.json();
+                    setJokeDetails(data);
+                    console.log("Fetched joke details:", data);
+                } catch (error) {
+                    console.error("Error fetching joke details:", error);
+                }
+            }
+        };
+        fetchJokeDetails();
+    }, [joke]);
+
+    if (!joke) {
+        return <div>No joke found!</div>;
+    }
+
+    const likers = jokeDetails?.likers || [];
+    const dislikers = jokeDetails?.dislikers || [];
 
     return (
         <div className="relative w-full min-h-screen font-poppins">
@@ -18,9 +52,9 @@ const Details = () => {
                     {/* joke description box */}
                     <div className="bg-white border rounded-md newshadow mt-[20px] mb-[20px]">
                         <div className="flex flex-col justify-center items-center ">
-                            <h2 className="p-[13px] text-center text-xl font-slackey">{title}</h2>
+                            <h2 className="p-[13px] text-center text-xl font-slackey">{jokeDetails?.title  || 'Loading...'}</h2>
                             <p className="text-center lg:text-[15px] xl:text-[20px] lg:w-5/6 xl:w-4/6 p-14">
-                                {content}
+                                {jokeDetails?.content|| 'Loading...'}
                             </p>
                         </div>
                     </div>
@@ -33,27 +67,35 @@ const Details = () => {
                     {/* jokes list container */}
                         <div className="flex flex-col text-white">
                             <p className="pt-[18px]">See what others think:</p>
-                            <div className="flex flex-row justify-between pl-[20px] pr-[50px] py-[20px] items-center">
-                                <div className="flex flex-row gap-[25px] items-center">
-                                    <img src={left} className="w-[25px] h-[25px] rounded-full bg-red-400" alt="jokeimage" />
-                                    <p className="text-[13px] text-white">Lorem ipsum dolor</p>
-                                </div>
-                                <p>😑</p>
-                            </div>
-                            <div className="flex flex-row justify-between pl-[20px] pr-[50px] py-[20px] items-center">
-                                <div className="flex flex-row gap-[25px] items-center">
-                                    <img src={left} className="w-[25px] h-[25px] rounded-full bg-red-400" alt="jokeimage" />
-                                    <p className="text-[13px] text-white">Lorem ipsum dolor</p>
-                                </div>
-                                <p>😑</p>
-                            </div>
-                            <div className="flex flex-row justify-between pl-[20px] pr-[50px] py-[20px] items-center">
-                                <div className="flex flex-row gap-[25px] items-center">
-                                    <img src={left} className="w-[25px] h-[25px] rounded-full bg-red-400" alt="jokeimage" />
-                                    <p className="text-[13px] text-white">Lorem ipsum dolor</p>
-                                </div>
-                                <p>😑</p>
-                            </div>
+
+                            {likers.length > 0 || dislikers.length > 0 ? (
+                                <>
+                                    {likers.map((user, index) => (
+                                    <div 
+                                        key={index} 
+                                        className="flex flex-row justify-between pl-[20px] pr-[50px] py-[20px] items-center">
+                                            <div className="flex flex-row gap-[25px] items-center">
+                                                <img src={left} className="w-[25px] h-[25px] rounded-full bg-red-400" alt="jokeimage" />
+                                                <p className="text-[13px] text-white">{user}</p>
+                                            </div>
+                                        <p aria-label="like">😂</p>     
+                                    </div>
+                                    ))}
+                                     {dislikers.map((user, index) => (
+                                    <div 
+                                        key={index} 
+                                        className="flex justify-between pl-[20px] pr-[50px] py-[20px] items-center">
+                                            <div className="flex flex-row gap-[25px] items-center">
+                                                <img src={left} className="w-[25px] h-[25px] rounded-full bg-red-400" alt="jokeimage" />
+                                                <p className="text-[13px] text-white">{user}</p>
+                                            </div>
+                                        <p aria-label="dislike">😑</p> 
+                                    </div>
+                                    ))}
+                                </>
+                            ) : (
+                                <p className="text-[13px] text-white">No feedback yet.</p>
+                            )}
                             
                         </div>
                     </div>
