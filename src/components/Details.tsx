@@ -1,8 +1,12 @@
 import React from "react";
 import background from "../assets/background.jpg";
 import left from "../assets/left.png";
+import { useLocation } from "react-router-dom";
 
-const Details : React.FC = () => {
+const Details = () => {
+    const location = useLocation();
+    const { title, content } = location.state?.joke || { title: '', content: '' };
+
     return (
         <div className="relative w-full min-h-screen font-poppins">
             <div
@@ -10,15 +14,13 @@ const Details : React.FC = () => {
             style={{ backgroundImage: `url(${background})` }}>
                 <div className="relative z-10 h-screen w-1/2 py-[20px] mx-auto flex items-center justify-center">
 
-                    <div className="flex flex-col w-screen bg-blue-300">
+                    <div className="flex flex-col w-screen">
                     {/* joke description box */}
                     <div className="bg-white border rounded-md newshadow mt-[20px] mb-[20px]">
                         <div className="flex flex-col justify-center items-center ">
+                            <h2 className="p-[13px] text-center text-xl font-slackey">{title}</h2>
                             <p className="text-center lg:text-[15px] xl:text-[20px] lg:w-5/6 xl:w-4/6 p-14">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                            ullamco laboris nisi ut aliquip ex ea commodo consequat
+                                {content}
                             </p>
                         </div>
                     </div>

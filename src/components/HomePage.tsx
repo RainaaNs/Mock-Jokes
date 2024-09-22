@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-
-import { fetchJokes, fetchSingleJoke, Joke } from "../api/jokeApi";
+import { useNavigate } from "react-router-dom";
+import { fetchJokes, Joke } from "../api/jokeApi";
 
 import left from "../assets/left.png";
 import right from "../assets/right.png";
@@ -10,37 +10,49 @@ const HomePage = () => {
     const [jokes, setJokes] = useState<Joke[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [liked, setLiked] = useState<Joke[]>([]);
+    const [disliked, setDisliked] = useState<Joke[]>([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const loadJoke = async () => {
-            if (currentPage > jokes.length) {
-                try {
-                    const fetchedJoke = await fetchJokes();
-                    setJokes(fetchedJoke);
-                    setError(null);
-                }   catch (error) {
-                    setError('Failed to load joke. Please try again.');
-                }
+    const loadJoke = async () => {
+        if (currentPage > jokes.length) {
+            try {
+                const fetchedJoke = await fetchJokes();
+                setJokes(fetchedJoke);
+                setError(null);
+            }   catch (error) {
+                setError('Failed to load joke. Please try again.');
             }
-        };
-        loadJoke();
+        }
+    };
+      loadJoke();
     }, [currentPage, jokes.length]);
+
 
     const currentJoke = jokes[currentPage - 1];
 
 
-    
-
-    const [liked, setLiked] = useState([]);
-    const [disliked, setDisliked] = useState([]);
-
     const addToLiked = () => {
-
+      if (currentJoke && !liked.some(joke => joke.title === currentJoke.title)) {
+        setLiked((prevLiked) => {
+          const updatedDisliked = disliked.filter(joke => joke.title !== currentJoke.title);
+          setDisliked(updatedDisliked);
+          return [...prevLiked, currentJoke]; 
+      });
     }
+  };
 
     const addToDisliked = () => {
-
+      if (currentJoke && !disliked.some(joke => joke.title === currentJoke.title)) {
+        setDisliked((prevDisliked) => {
+          const updatedLiked = liked.filter(joke => joke.title !== currentJoke.title);
+          setLiked(updatedLiked); 
+          return [...prevDisliked, currentJoke]; 
+      });
     }
+  };
 
   return (
     <div className="relative w-full min-h-screen font-poppins">
@@ -78,15 +90,27 @@ const HomePage = () => {
 
           <div className="w-full flex justify-center gap-5 mt-[-20px]">
             <button 
-            className="mt-7 py-4 px-6 bg-buttonYellow rounded-[25px] items-center md:text-[20px] xl:text-[22px] shadow-md"
+            className="mt-7 py-4 px-6 bg-buttonYellow rounded-[25px] items-center md:text-[20px] xl:text-[22px] shadow-md transform active:scale-90"
             onClick={addToLiked}
                >
               😂 Like
             </button>
             <button 
-            className="mt-7 py-4 h-[73px] px-5 border-2 rounded-[25px] items-center md:text-[20px] xl:text-[22px] shadow-md"
+            className="mt-7 py-4 h-[73px] px-5 border-2 rounded-[25px] items-center md:text-[20px] xl:text-[22px] shadow-md transform active:scale-90"
             onClick={addToDisliked}>
               😑 Dislike
+            </button>
+            <button
+              className="mt-7 py-4 px-6 bg-green-500 rounded-[25px] text-white md:text-[20px] xl:text-[22px] shadow-md transform active:scale-90"
+              onClick={() => navigate('/likes', { state: { likedJokes: liked } })}
+            >
+              View Liked
+            </button>
+            <button
+              className="mt-7 py-4 px-6 bg-green-500 rounded-[25px] text-white md:text-[20px] xl:text-[22px] shadow-md transform active:scale-90"
+              onClick={() => navigate('/dislikes', { state: { dislikedJokes: disliked } })}
+            >
+              View Disliked
             </button>
           </div>
         </div>

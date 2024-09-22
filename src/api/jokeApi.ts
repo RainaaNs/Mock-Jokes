@@ -7,18 +7,6 @@ export interface Joke {
     users_who_disliked?: [number]
 }
 
-export const fetchSingleJoke = async (): Promise<[Joke]> => {
-    try {
-        const response = await fetch('https://jokes-backend-11nq.onrender.com/joke');
-        const data = await response.json()
-        console.log(data)
-        return [data];
-    }   
-    catch (error) {
-        console.error('Error fetching single joke', error);
-        throw error;
-    }
-};
 
 export const fetchJokes = async (): Promise<Joke[]> => {
     try {
