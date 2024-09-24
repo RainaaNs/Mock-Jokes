@@ -3,7 +3,11 @@ import background from "../assets/background.jpg"
 
 import {FaEye, FaEyeSlash} from "react-icons/fa";
 
-const Login : React.FC = () =>{
+const Login = () => {
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [error, setError] = useState<string | null>(null);
+
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
     const handlePassword=() =>{
