@@ -21,7 +21,7 @@ const SignUp = () => {
         setError(null);
 
         try {
-            const response = await fetch('', {
+            const response = await fetch('https://jokes-backend-11nq.onrender.com/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
