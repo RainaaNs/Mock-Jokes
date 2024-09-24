@@ -174,7 +174,7 @@ const HomePage = () => {
             <button
               className="mt-7 py-4 px-6 bg-green-500 rounded-[25px] text-white md:text-[20px] xl:text-[22px] shadow-md transform active:scale-90"
               onClick={() =>
-                navigate("/likes", { state: { likedJokes: liked } })
+                navigate("/activity", { state: { likedJokes: liked } })
               }
             >
               View Liked
@@ -182,7 +182,7 @@ const HomePage = () => {
             <button
               className="mt-7 py-4 px-6 bg-green-500 rounded-[25px] text-white md:text-[20px] xl:text-[22px] shadow-md transform active:scale-90"
               onClick={() =>
-                navigate("/dislikes", { state: { dislikedJokes: disliked } })
+                navigate("/activity", { state: { dislikedJokes: disliked } })
               }
             >
               View Disliked
