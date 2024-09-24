@@ -3,13 +3,17 @@ import background from "../assets/background.jpg";
 import left from "../assets/left.png";
 import { useLocation } from "react-router-dom";
 
+interface User {
+    id: string;
+    username: string;
+}
+
 
 interface JokeDetails {
     title: string;
     content: string;
-    id: string;
-    likers: string[]; 
-    dislikers: string[]; 
+    likers: User[]; 
+    dislikers: User[]; 
 }
 
 const Details = () => {
@@ -76,7 +80,7 @@ const Details = () => {
                                         className="flex flex-row justify-between pl-[20px] pr-[50px] py-[20px] items-center">
                                             <div className="flex flex-row gap-[25px] items-center">
                                                 <img src={left} className="w-[25px] h-[25px] rounded-full bg-red-400" alt="jokeimage" />
-                                                <p className="text-[13px] text-white">{user}</p>
+                                                <p className="text-[13px] text-white">{user.username}</p>
                                             </div>
                                         <p aria-label="like">😂</p>     
                                     </div>
@@ -87,7 +91,7 @@ const Details = () => {
                                         className="flex justify-between pl-[20px] pr-[50px] py-[20px] items-center">
                                             <div className="flex flex-row gap-[25px] items-center">
                                                 <img src={left} className="w-[25px] h-[25px] rounded-full bg-red-400" alt="jokeimage" />
-                                                <p className="text-[13px] text-white">{user}</p>
+                                                <p className="text-[13px] text-white">{user.username}</p>
                                             </div>
                                         <p aria-label="dislike">😑</p> 
                                     </div>

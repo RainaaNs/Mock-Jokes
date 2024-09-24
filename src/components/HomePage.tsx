@@ -21,7 +21,7 @@ const HomePage = () => {
         if (currentPage > jokes.length) {
             try {
                 const fetchedJoke = await fetchJokes();
-                setJokes(fetchedJoke);
+                setJokes((prevJokes) => [...prevJokes, ...fetchedJoke]);
                 setError(null);
             }   catch (error) {
                 setError('Failed to load joke. Please try again.');
@@ -67,7 +67,7 @@ const HomePage = () => {
           <div className="relative flex flex-row gap-4 justify-center items-center w-2/3 mx-auto">
             <img
               src={left}
-              className="w-[50px] h-[50px] transition-transform transform hover:scale-150 active:scale-95 cursor-pointer"
+              className={`w-[50px] h-[50px] transition-transform transform hover:scale-150 active:scale-95 cursor-pointer ${currentPage === 1 ? "invisible" : ""}`}
               alt="left button"
               onClick={() => setCurrentPage(prevPage => Math.max(prevPage - 1, 1))}
             />
