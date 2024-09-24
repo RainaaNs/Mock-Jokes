@@ -10,6 +10,18 @@ interface Joke {
   content: string;
 }
 
+const dislikeImge = [
+  "https://imgs.search.brave.com/SfLQwcj7uB9hM7Md_wreHKRc-5y62UszTm6Mijl-D2g/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by9oZWFydGJyZWFr/aW5nLXNhZC1jYXJ0/b29uLWltYWdlLWVt/b3Rpb25hbC10aGVt/ZXNfMTA0NjMxOS0x/NDM3NTIuanBnP3Np/emU9NjI2JmV4dD1q/cGc",
+  "https://imgs.search.brave.com/cAp3ZYHlY2NdEdgb8aOmldmUMAVuzhWUVw66bs-OGLQ/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by9jYXJ0b29uLW1h/bi13aXRoLXNhZC1m/YWNlLWlzLWNyeWlu/Z18xMTkxODcxLTU4/NTg3LmpwZz9zaXpl/PTYyNiZleHQ9anBn",
+  "https://imgs.search.brave.com/FxRMvyxzHx19TCkrwxDhky0YMrLQUPDhbur5JKMubOw/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAwLzYzLzU3LzEz/LzM2MF9GXzYzNTcx/Mzk0XzlRWXEyMjZE/Nm03NEtWdGt4V3U5/ejFBSXAyaXNjOEti/LmpwZw",
+];
+
+const getRandomItem = (imageArr: string[]): string | undefined => {
+  if (imageArr.length === 0) return undefined;
+  const randomIndex = Math.floor(Math.random() * imageArr.length);
+  return imageArr[randomIndex];
+};
+
 const Dislikes = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -40,14 +52,16 @@ const Dislikes = () => {
   };
 
   return (
-    <div className=" mt-4" >
-      {
-        DislikesAcivity.map((item) => (
-          <DislikesCard key={item.id} image={item.Image} text={item.text} />
-        ))
-      }
-      
-      <div className=" mt-4" >
+    <div className=" mt-4">
+      {DislikesAcivity.map((item) => (
+        <DislikesCard
+          key={item.id}
+          image={getRandomItem(dislikeImge)}
+          text={item.text}
+        />
+      ))}
+
+      <div className=" mt-4">
         <div className="flex flex-col ">
           {currentJokes.map((joke: Joke, index: number) => (
             <div

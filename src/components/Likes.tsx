@@ -10,12 +10,26 @@ interface Joke {
   content: string;
 }
 
+// declear a var that will store dislike images and liked images
+
+const likeImages = [
+  "https://imgs.search.brave.com/b49ILTkvIm0D-PltxS-I2EAP-Yw__P3_zSppmAWcVCQ/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZnJlZWltYWdl/cy5jb20vaW1hZ2Vz/L2xhcmdlLXByZXZp/ZXdzLzNmNi9sYXVn/aC0xMzc3ODk0Lmpw/Zz9mbXQ",
+  "https://imgs.search.brave.com/m0kv4govM-fhiyGqx6s7w0Nw1oxXT2dsit6e6_efMp4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9w/cmV0dHktbWl4ZWQt/cmFjZS1mZW1hbGUt/bW9kZWwtbGF1Z2hz/LWhhcHBpbHlfMjcz/NjA5LTI4NTIxLmpw/Zz9zaXplPTYyNiZl/eHQ9anBn",
+  "https://imgs.search.brave.com/X0BnpZ95CIBSMQC5nZsdb84iz8-KXgMYtntcu675siM/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk1USXhPVFE1/TWpnd05WNUJNbDVC/YW5CblhrRnRaVFl3/TnpBd05ETTIuX1Yx/X1FMNzVfVVg4MjBf/LmpwZw",
+];
+
+const getRandomItem = (imageArr: string[]): string | undefined => {
+  if (imageArr.length === 0) return undefined;
+  const randomIndex = Math.floor(Math.random() * imageArr.length);
+  return imageArr[randomIndex];
+};
+
 const Likes = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const likedJokes = location.state?.likedJokes || [];
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);  
   const jokesPerPage = 4;
 
   const indexOfLastJoke = currentPage * jokesPerPage;
@@ -42,13 +56,13 @@ const Likes = () => {
 
   return (
     <div className=" mt-4">
-
-      {
-        LikesAcivity.map((item) => (
-          <LikesCard key={item.id} image={item.Image} text={item.text} />
-        ))
-      }
-      
+      {LikesAcivity.map((item) => (
+        <LikesCard
+          key={item.id}
+          image={getRandomItem(likeImages)}
+          text={item.text}
+        />
+      ))}
 
       <div className="flex flex-col mt-4 ">
         {currentJokes.map((joke: Joke, index: number) => (

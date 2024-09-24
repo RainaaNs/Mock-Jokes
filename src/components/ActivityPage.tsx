@@ -25,6 +25,7 @@ const ActivityPage = () => {
   const currentJokes = dislikedJokes.slice(indexOfFirstJoke, indexOfLastJoke);
   const totalPages = Math.ceil(dislikedJokes.length / jokesPerPage);
 
+
   const handleNext = () => {
     if (currentPage < totalPages) {
       setCurrentPage((prev) => prev + 1);
