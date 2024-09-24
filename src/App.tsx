@@ -7,6 +7,8 @@ import SignUp from './components/SignUp';
 import Login from './components/Login';
 import Likes from './components/Likes';
 import Dislikes from './components/Dislikes';
+import ActivityPage from './components/ActivityPage';
+
 
 
 function App() {
@@ -19,7 +21,7 @@ function App() {
           <Route path="/details" element={<Details />} />
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/login" element={<Login/>} />
-          <Route path="/likes" element={<Likes/>} />
+          <Route path="/activity" element={<ActivityPage />} />
           <Route path="/dislikes" element={<Dislikes/>} />
         </Routes>
       </div>
