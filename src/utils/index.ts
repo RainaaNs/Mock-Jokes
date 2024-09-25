@@ -12,7 +12,7 @@ export const ActivityTabs = [
 
 
 
-export const LikesAcivity = [
+export const LikesActivity = [
     {
         id: 1,
         Image: ImageSrc,
@@ -39,7 +39,7 @@ export const LikesAcivity = [
     },
 ]
 
-export const DislikesAcivity = [
+export const DislikesActivity = [
     {
         id: 1,
         Image: ImageSrc,

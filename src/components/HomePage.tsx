@@ -5,6 +5,8 @@ import pepe from "../assets/Pepe.png";
 import left from "../assets/left.png";
 import right from "../assets/right.png";
 import background from "../assets/background.jpg";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const HomePage = () => {
   const [jokes, setJokes] = useState<Joke[]>([]);
@@ -12,6 +14,8 @@ const HomePage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [liked, setLiked] = useState<Joke[]>([]);
   const [disliked, setDisliked] = useState<Joke[]>([]);
+  const token = cookies.get("USER-TOKEN");
+  const userId = cookies.get("USER-ID");
   const [reactions, setReactions] = useState<{
     [key: number]: { liked: boolean; disliked: boolean };
   }>({});
@@ -63,12 +67,17 @@ const HomePage = () => {
           {
             method: "POST",
             headers: {
+              authorization: token,
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(currentJoke),
+            body: JSON.stringify({
+              id : currentJoke.id,
+              user : userId
+            }),
           }
         );
-        if (response.ok) {
+        const data = await response.json()
+        if (!data.error) {
           setReactions((prevReactions) => ({
             ...prevReactions,
             [currentJoke.id]: { liked: true, disliked: false },
@@ -76,6 +85,7 @@ const HomePage = () => {
           console.log("Joke liked successfully");
         } else {
           console.error("Failed to like the joke");
+          alert(data.error)
         }
       } catch (error) {
         console.error("Error liking the joke:", error);
@@ -91,12 +101,17 @@ const HomePage = () => {
           {
             method: "POST",
             headers: {
+              authorization: token,
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(currentJoke),
+            body: JSON.stringify({
+              id : currentJoke.id,
+              user : userId
+            }),
           }
         );
-        if (response.ok) {
+        const data = await response.json()
+        if (!data.error) {
           setReactions((prevReactions) => ({
             ...prevReactions,
             [currentJoke.id]: { liked: false, disliked: true },
@@ -104,6 +119,7 @@ const HomePage = () => {
           console.log("Joke disliked successfully");
         } else {
           console.error("Failed to dislike the joke");
+          alert(data.error)
         }
       } catch (error) {
         console.error("Error disliking the joke:", error);
@@ -112,6 +128,8 @@ const HomePage = () => {
   };
 
   return (
+    <>
+  {token && (
     <div className="relative w-full min-h-screen font-poppins">
       <div
         className="absolute bg-cover bg-center h-full w-full"
@@ -206,6 +224,10 @@ const HomePage = () => {
         )}
       </div>
     </div>
+)} {
+  !token && (window.location.href = "/")
+} 
+</>
   );
 };
 export default HomePage;

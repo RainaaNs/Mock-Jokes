@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import background from "../assets/background.jpg";
+import React, { useEffect, useState } from "react";
+import Cookies from "universal-cookie";
 
 import { useNavigate, useLocation } from "react-router-dom";
-import { LikesAcivity } from "../utils";
+import { LikesActivity } from "../utils";
 import LikesCard from "./card/LikesCard";
 
 interface Joke {
@@ -10,7 +10,8 @@ interface Joke {
   content: string;
 }
 
-// declear a var that will store dislike images and liked images
+const cookie = new Cookies();
+// declare a var that will store dislike images and liked images
 
 const likeImages = [
   "https://imgs.search.brave.com/b49ILTkvIm0D-PltxS-I2EAP-Yw__P3_zSppmAWcVCQ/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZnJlZWltYWdl/cy5jb20vaW1hZ2Vz/L2xhcmdlLXByZXZp/ZXdzLzNmNi9sYXVn/aC0xMzc3ODk0Lmpw/Zz9mbXQ",
@@ -25,8 +26,10 @@ const getRandomItem = (imageArr: string[]): string | undefined => {
 };
 
 const Likes = () => {
-  const navigate = useNavigate();
+  const token =  cookie.get("USER-TOKEN")
+  const user = cookie.get("USER-ID")
   const location = useLocation();
+  const [jokes, setJokes] = useState<Joke[]>([]);
   const likedJokes = location.state?.likedJokes || [];
 
   const [currentPage, setCurrentPage] = useState(1);  
@@ -50,13 +53,33 @@ const Likes = () => {
     }
   };
 
-  const handleJokeClick = (joke: Joke) => {
-    navigate("/details", { state: { joke } });
-  };
+  useEffect(()=>{
+    const jokes = async () =>{
+      try {
+        const response = await fetch(`https://jokes-backend-11nq.onrender.com/user=${user}`);
+        const data = await response.json()
+        if(!data.error){
+          setJokes(data)
+          console.log(data)
+        }else{
+          alert(data.error)
+        }
+    }   
+    catch (error) {
+        console.error('Error fetching jokes', error);
+        throw error;
+    }
+    }
+    jokes
+  },[])
+
+  // const handleJokeClick = (joke: Joke) => {
+  //   navigate("/details", { state: { joke } });
+  // };
 
   return (
     <div className=" mt-4">
-      {LikesAcivity.map((item) => (
+      {LikesActivity.map((item) => (
         <LikesCard
           key={item.id}
           image={getRandomItem(likeImages)}
@@ -69,7 +92,7 @@ const Likes = () => {
           <div
             key={index}
             className="flex flex-row justify-between pl-[20px] pr-[90px] py-[20px] items-center"
-            onClick={() => handleJokeClick(joke)}
+            // onClick={() => handleJokeClick(joke)}
           >
             <div className="flex flex-row gap-[25px] items-center">
               <p className="text-[13px] text-white cursor-pointer active:scale-95">
