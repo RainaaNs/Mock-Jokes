@@ -59,11 +59,13 @@ const SignUp = () => {
          <div className="relative z-10 h-screen flex justify-center items-center">
             <div className="bg-white justify-center w-5/12 h-4/6 rounded-2xl shadow-md shadow-gray-600">
                 <div className="flex flex-col h-full justify-center items-center">
+
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 {success && <p style={{ color: 'green' }}>{success}</p>}
+                <form className="w-full text-center" onSubmit={handleSignUp}>
                     <p className="font-slackey text-[36px] mb-4">Sign Up</p>
-                    <form onSubmit={handleSignUp}>
-                       <div className="flex border border-borderOrange rounded-md items-center text-[12px] my-2 pl-[15px]  w-4/6 h-[50px]">
+                    <div className="relative w-full flex justify-center">
+                       <div className="flex border border-borderOrange rounded-md items-center text-[12px] my-2 pl-[15px] w-4/6 h-[50px]">
                             <input 
                             type="text"
                             value={username}
@@ -72,6 +74,7 @@ const SignUp = () => {
                             className="border-none outline-none focus-visible:border-none w-4/5" 
                             placeholder="Username"></input>
                         </div>
+                    </div>
                     <div className="relative w-full flex justify-center">
                         <div className="flex border border-borderOrange rounded-md items-center text-[12px] my-2 pl-[15px]  w-4/6 h-[50px]">
                             <input 
@@ -102,9 +105,9 @@ const SignUp = () => {
                         
                     
                     </div>
-                    </form>
+                    
                     <button type="submit" className="mt-3 py-2 px-7 bg-buttonYellow rounded-full items-center text-[22px] shadow-md shadow-gray-400 "> Create Account</button>
-
+                </form>
                 </div>
             </div>
 
