@@ -5,6 +5,7 @@ import { Joke } from "../../api/jokeApi";
 
 const cookies = new Cookies();
 const user = cookies.get("USER-ID");
+const token = cookies.get("USER-TOKEN");
 
 const likeImages = [
   "https://imgs.search.brave.com/b49ILTkvIm0D-PltxS-I2EAP-Yw__P3_zSppmAWcVCQ/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZnJlZWltYWdl/cy5jb20vaW1hZ2Vz/L2xhcmdlLXByZXZp/ZXdzLzNmNi9sYXVn/aC0xMzc3ODk0Lmpw/Zz9mbXQ",
@@ -35,11 +36,18 @@ const ActivityContent = ({ tab }: { tab: ActivityType }) => {
     const fetchLikedJokes = async () => {
       try {
         const response = await fetch(
-          `https://jokes-backend-11nq.onrender.com/likes?user=${user}`
+          `https://jokes-backend-11nq.onrender.com/likes?user=${user}`,
+          {
+            headers: {
+              // Properly format the Authorization header
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         const data = await response.json();
         if (!data.error) {
-          setLikedJokes(data);
+          setLikedJokes(data.jokes);
+          console.log(data);
         } else {
           alert(data.error);
         }
@@ -54,11 +62,18 @@ const ActivityContent = ({ tab }: { tab: ActivityType }) => {
     const fetchDislikedJokes = async () => {
       try {
         const response = await fetch(
-          `https://jokes-backend-11nq.onrender.com/dislikes?user=${user}`
+          `https://jokes-backend-11nq.onrender.com/dislikes?user=${user}`,
+          {
+            headers: {
+              // Properly format the Authorization header
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         const data = await response.json();
         if (!data.error) {
-          setDislikedJokes(data);
+          setDislikedJokes(data.jokes);
+          console.log(data);
         } else {
           alert(data.error);
         }
