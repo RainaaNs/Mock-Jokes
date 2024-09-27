@@ -4,6 +4,7 @@ import left from "../assets/left.png";
 import { useLocation } from "react-router-dom";
 
 import Cookies from "universal-cookie";
+
 const cookies = new Cookies();
 
 interface User {
@@ -51,11 +52,8 @@ const Details = () => {
       }
     };
     fetchJokeDetails();
-  }, [joke]);
+  }, [joke, token]);
 
-  // if (!joke) {
-  //     return <div>No joke found!</div>;
-  // }
 
   const likers = jokeDetails?.likers || [];
   const dislikers = jokeDetails?.dislikers || [];
@@ -70,6 +68,7 @@ const Details = () => {
           >
             <div className="relative z-10 h-screen w-1/2 py-[20px] mx-auto flex items-center justify-center">
               <div className="flex flex-col w-screen">
+
                 {/* joke description box */}
                 <div className="bg-white border rounded-md newshadow mt-[20px] mb-[20px]">
                   <div className="flex flex-col justify-center items-center ">

@@ -1,19 +1,19 @@
-import { useState, ChangeEvent } from "react";
+import { useState } from "react";
 import background from "../assets/background.jpg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
+
 const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   function loginUser() {
-    console.log("userContext?.userId");
+    // console.log("userContext?.userId");
     try {
-      fetch("http://localhost:4000/login", {
+      fetch("https://jokes-backend-11nq.onrender.com/login", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -29,7 +29,7 @@ const Login = () => {
           if (!data.error) {
             cookies.set("USER-TOKEN", data.token, { path: "/" });
             cookies.set("USER-ID", data.user.id, { path: "/" });
-            window.location.href = "/";
+            window.location.href = "/homepage";
           } else {
             alert(data.error);
           }
@@ -86,7 +86,7 @@ const Login = () => {
             </div>
 
             <button
-              className="py-2 px-5 mt-7 bg-buttonYellow rounded-full items-center text-[20px] shadow-md shadow-gray-400 "
+              className="py-2 px-5 mt-7 bg-buttonYellow rounded-full items-center text-[20px] shadow-md shadow-gray-400 transform active:scale-90 "
               onClick={loginUser}
             >
               Login
