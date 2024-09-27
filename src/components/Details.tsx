@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import background from "../assets/background.jpg";
 import left from "../assets/left.png";
 import { useLocation } from "react-router-dom";
-
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
@@ -13,28 +12,34 @@ interface User {
 }
 
 interface JokeDetails {
-  title: string;
-  content: string;
+  joke: Joke;
   likers: User[];
   dislikers: User[];
 }
 
+
+interface Joke {
+  title: string;
+  content: string;
+}
+
+
 const Details = () => {
   const location = useLocation();
-  const joke = location.state?.joke;
+  const jokeId = location.state?.jokeId;
 
   const [jokeDetails, setJokeDetails] = useState<JokeDetails | null>(null);
   const token = cookies.get("USER-TOKEN");
 
   useEffect(() => {
     const fetchJokeDetails = async () => {
-      if (joke && joke.id) {
+      if (jokeId) {
         try {
           const response = await fetch(
-            `https://jokes-backend-11nq.onrender.com/joke-details?id=${joke.id}`,
+            `https://jokes-backend-11nq.onrender.com/joke-details?id=${jokeId}`,
             {
               headers: {
-                authorization: token,
+                Authorization: `Bearer ${token}`,
               },
             }
           );
@@ -52,7 +57,7 @@ const Details = () => {
       }
     };
     fetchJokeDetails();
-  }, [joke, token]);
+  }, [jokeId, token]);
 
 
   const likers = jokeDetails?.likers || [];
@@ -73,10 +78,10 @@ const Details = () => {
                 <div className="bg-white border rounded-md newshadow mt-[20px] mb-[20px]">
                   <div className="flex flex-col justify-center items-center ">
                     <h2 className="p-[13px] text-center text-xl font-slackey">
-                      {jokeDetails?.title || "Loading..."}
+                      {jokeDetails?.joke.title}
                     </h2>
                     <p className="text-center lg:text-[15px] xl:text-[20px] lg:w-5/6 xl:w-4/6 p-14">
-                      {jokeDetails?.content || "Loading..."}
+                      {jokeDetails?.joke.content}
                     </p>
                   </div>
                 </div>

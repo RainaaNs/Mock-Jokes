@@ -8,9 +8,9 @@ const ActivityPage = () => {
   const [tab, setTab] = useState<ActivityType>("like");
 
   return (
-    <div className="relative w-full h-screen font-poppins overflow-hidden">
+    <div className="relative w-full h-screen font-poppins">
       <div
-        className="absolute bg-cover bg-center h-full w-full"
+        className="fixed bg-cover bg-center h-full w-full overflow-auto"
         style={{ backgroundImage: `url(${background})` }}
       >
         <div className="relative z-10 h-full pt-24 md:pt-36 w-[90%] md:w-1/2 mx-auto flex  ">

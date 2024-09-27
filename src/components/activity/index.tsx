@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import { ActivityType } from "../../interface/activity.interface";
 import { Joke } from "../../api/jokeApi";
+import LikesCard from "../card/LikesCard";
+import DislikesCard from "../card/DislikesCard";
+import { useNavigate } from "react-router-dom";
 
 const cookies = new Cookies();
 const user = cookies.get("USER-ID");
@@ -24,64 +27,43 @@ const getRandomImage = (images: string[]) => {
 };
 
 const ActivityContent = ({ tab }: { tab: ActivityType }) => {
+  const navigate = useNavigate();
+
   const [likedJokes, setLikedJokes] = useState<Joke[]>([]);
   const [dislikedJokes, setDislikedJokes] = useState<Joke[]>([]);
+
+  const [selectedJoke, setSelectedJoke] =useState<Joke | null>(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const jokesPerPage = 4;
   const indexOfLastJoke = currentPage * jokesPerPage;
   const indexOfFirstJoke = indexOfLastJoke - jokesPerPage;
 
-  useEffect(() => {
-    const fetchLikedJokes = async () => {
-      try {
-        const response = await fetch(
-          `https://jokes-backend-11nq.onrender.com/likes?user=${user}`,
-          {
-            headers: {
-              // Properly format the Authorization header
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const data = await response.json();
-        if (!data.error) {
-          setLikedJokes(data.jokes);
-          console.log(data);
-        } else {
-          alert(data.error);
-        }
-      } catch (error) {
-        console.error("Error fetching liked jokes", error);
-      }
-    };
-    fetchLikedJokes();
-  }, []);
 
   useEffect(() => {
-    const fetchDislikedJokes = async () => {
-      try {
-        const response = await fetch(
-          `https://jokes-backend-11nq.onrender.com/dislikes?user=${user}`,
-          {
-            headers: {
-              // Properly format the Authorization header
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const data = await response.json();
-        if (!data.error) {
-          setDislikedJokes(data.jokes);
-          console.log(data);
-        } else {
-          alert(data.error);
+    const fetchJokes = async (type: string) => {
+      const response = await fetch(
+        `https://jokes-backend-11nq.onrender.com/${type}?user=${user}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      } catch (error) {
-        console.error("Error fetching disliked jokes", error);
+      );
+      const data = await response.json();
+      if (!data.error) {
+        if (type === "likes") {
+          setLikedJokes(data.jokes);
+        } else {
+          setDislikedJokes(data.jokes);
+        }
+      } else {
+        alert(data.error);
       }
     };
-    fetchDislikedJokes();
+
+    fetchJokes("likes");
+    fetchJokes("dislikes");
   }, []);
 
   const currentJokes =
@@ -108,21 +90,26 @@ const ActivityContent = ({ tab }: { tab: ActivityType }) => {
 
   return (
     <div className="mt-4">
-      <div className="flex items-center justify-between p-2">
-        <div className=" flex gap-4 items-center">
+      <div className="flex items-center px-2 md:px-8">
+        <div className=" flex flex-col gap-2 items-center w-full">
           {currentJokes.length > 0 ? (
             currentJokes.map((joke, index) => (
-              <div key={index} className="mb-4">
-                <img
-                  src={
-                    tab === "like"
-                      ? getRandomImage(likeImages)
-                      : getRandomImage(dislikeImages)
-                  }
-                  alt="joke"
-                  className="w-full h-auto rounded"
-                />
-                <p className="text-white">{joke.title}</p>
+              <div 
+              key={index} 
+              onClick={()=>{navigate("/details", { state: { jokeId: joke.id } });}} 
+              className="w-full"
+              >
+                {tab === "like" ? (
+                  <LikesCard
+                    image={getRandomImage(likeImages)}
+                    text={joke.title}
+                  />
+                ) : (
+                  <DislikesCard
+                    image={getRandomImage(dislikeImages)}
+                    text={joke.title}
+                  />
+                )}
               </div>
             ))
           ) : (
@@ -131,22 +118,23 @@ const ActivityContent = ({ tab }: { tab: ActivityType }) => {
         </div>
       </div>
 
-      <div className="flex justify-between mt-4">
+      <div className="flex justify-between px-8 mt-6">
         <button
           onClick={handlePrevious}
           disabled={currentPage === 1}
-          className="bg-buttonYellow text-white py-2 px-4 rounded disabled:opacity-50"
+          className="bg-buttonYellow text-white py-2 px-4 rounded disabled:opacity-20"
         >
           Previous
         </button>
         <button
           onClick={handleNext}
           disabled={currentPage === totalPages}
-          className="bg-buttonYellow text-white py-2 px-4 rounded disabled:opacity-50"
+          className="bg-buttonYellow text-white py-2 px-4 rounded disabled:opacity-20"
         >
           Next
         </button>
       </div>
+
 
       <div className="mt-2 text-white">
         Page {currentPage} of {totalPages}
