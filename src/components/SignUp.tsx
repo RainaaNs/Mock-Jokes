@@ -7,7 +7,7 @@ const SignUp = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string>("");
+  const [success] = useState<string>("");
 
   function registerUser() {
     try {
