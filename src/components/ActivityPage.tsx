@@ -22,8 +22,8 @@ const ActivityPage = () => {
                   onClick={() => setTab("like")}
                   className={`col-span-1 text-center cursor-pointer ${
                     tab === "like"
-                      ? "border-b-4 border-buttonYellow text-buttonYellow"
-                      : "border-b-2 border-buttonYellow"
+                      ? "border-b-4 w-[100px] md:w-auto border-buttonYellow text-buttonYellow"
+                      : "border-b-2 md:w-auto border-buttonYellow"
                   } w-full`}
                 >
                   Likes
@@ -32,7 +32,7 @@ const ActivityPage = () => {
                   onClick={() => setTab("dislike")}
                   className={`col-span-1 text-center cursor-pointer ${
                     tab === "dislike"
-                      ? "border-b-4 border-buttonYellow text-buttonYellow"
+                      ? "border-b-4 w-[100px] md:w-auto border-buttonYellow text-buttonYellow"
                       : "border-b-2 border-buttonYellow"
                   } w-full`}
                 >

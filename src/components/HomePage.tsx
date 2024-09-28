@@ -117,7 +117,7 @@ const HomePage = () => {
       {token ? (
         <div className="relative w-full min-h-screen overflow-hidden font-poppins">
           <div
-            className="absolute bg-cover bg-center h-full w-full"
+            className="fixed overflow-auto bg-cover bg-center h-full w-full"
             style={{ backgroundImage: `url(${background})` }}
           ></div>
           <div className="relative z-10 h-screen flex flex-col justify-center gap-16">

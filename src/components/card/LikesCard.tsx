@@ -22,7 +22,7 @@ const LikesCard = ({ text }: any) => {
         />
         <p className="text-[13px] md:text-base">{text}</p>
       </div>
-      <img src={Emoji} alt="Jokes img" className="w-12 h-12 md:w-16 md:h-16" />
+      <img src={Emoji} alt="Jokes img" className="w-8 h-8 md:w-16 md:h-16" />
     </div>
   );
 };

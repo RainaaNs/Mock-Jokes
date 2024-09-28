@@ -68,14 +68,18 @@ const Details = () => {
       {token && (
         <div className="relative w-full min-h-screen font-poppins">
           <div
-            className="absolute bg-cover bg-center h-full w-full"
+            className="fixed overflow-auto bg-cover bg-center h-full w-full"
             style={{ backgroundImage: `url(${background})` }}
           >
-            <div className="relative z-10 h-screen w-1/2 py-[20px] mx-auto flex items-center justify-center">
+            <div className="relative z-10 h-screen w-1/2 py-[20px] mx-auto flex md:items-center mt-[100px] md:mt-0 justify-center">
               <div className="flex flex-col w-screen">
+                <div className="text-white text-center text-[22px] mb-1 block md:hidden">
+                  <p>Details</p>
+                </div>
+               
 
                 {/* joke description box */}
-                <div className="bg-white border rounded-md newshadow mt-[20px] mb-[20px]">
+                <div className="bg-white w-[310px] md:w-auto rounded-md newshadow my-[30px]">
                   <div className="flex flex-col justify-center items-center ">
                     <h2 className="p-[13px] text-center text-xl font-slackey">
                       {jokeDetails?.joke.title}
@@ -87,18 +91,18 @@ const Details = () => {
                 </div>
 
                 {/* separator */}
-                <div className="bg-buttonYellow w-[550px] mx-auto h-[1px]"></div>
+                <div className="bg-buttonYellow w-[280px] md:w-[550px] mx-auto h-[1px]"></div>
 
                 {/* jokes list container */}
-                <div className="flex flex-col text-white">
-                  <p className="pt-[18px]">See what others think:</p>
+                <div className="flex flex-col text-white text-center md:text-left mt-6">
+                  <p className="pt-[18px] mb-3 md:mb-0">See what others think:</p>
 
                   {likers.length > 0 || dislikers.length > 0 ? (
                     <>
                       {likers.map((user, index) => (
                         <div
                           key={index}
-                          className="flex flex-row justify-between pl-[20px] pr-[50px] py-[20px] items-center"
+                          className="flex flex-row justify-between pl-[20px] pr-[50px] py-[20px] items-center md:mb-[-12px]"
                         >
                           <div className="flex flex-row gap-[25px] items-center">
                             <img

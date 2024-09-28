@@ -122,21 +122,21 @@ const ActivityContent = ({ tab }: { tab: ActivityType }) => {
         <button
           onClick={handlePrevious}
           disabled={currentPage === 1}
-          className="bg-buttonYellow text-white py-2 px-4 rounded disabled:opacity-20"
+          className="bg-yellow text-white py-2 px-4 rounded disabled:opacity-70 border"
         >
           Previous
         </button>
         <button
           onClick={handleNext}
           disabled={currentPage === totalPages}
-          className="bg-buttonYellow text-white py-2 px-4 rounded disabled:opacity-20"
+          className="bg-yellow text-white py-2 px-4 rounded disabled:opacity-90 border"
         >
           Next
         </button>
       </div>
 
 
-      <div className="mt-2 text-white">
+      <div className="mt-5 text-white">
         Page {currentPage} of {totalPages}
       </div>
     </div>
