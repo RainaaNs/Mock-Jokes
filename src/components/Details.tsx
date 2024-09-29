@@ -73,13 +73,14 @@ const Details = () => {
           >
             <div className="relative z-10 h-screen w-1/2 py-[20px] mx-auto flex md:items-center mt-[100px] md:mt-0 justify-center">
               <div className="flex flex-col w-screen">
-                <div className="text-white text-center text-[22px] mb-1 block md:hidden">
+
+                <div className="text-white text-center text-[22px] block md:hidden mb-[30px]">
                   <p>Details</p>
                 </div>
                
 
                 {/* joke description box */}
-                <div className="bg-white w-[310px] md:w-auto rounded-md newshadow my-[30px]">
+                <div className="bg-white w-[310px] md:w-auto rounded-md newshadow ">
                   <div className="flex flex-col justify-center items-center ">
                     <h2 className="p-[13px] text-center text-xl font-slackey">
                       {jokeDetails?.joke.title}
@@ -95,7 +96,7 @@ const Details = () => {
 
                 {/* jokes list container */}
                 <div className="flex flex-col text-white text-center md:text-left mt-6">
-                  <p className="pt-[18px] mb-3 md:mb-0">See what others think:</p>
+                  <p className="pt-[18px] mb-3 md:mb-0 text-[16px]">See what others think:</p>
 
                   {likers.length > 0 || dislikers.length > 0 ? (
                     <>

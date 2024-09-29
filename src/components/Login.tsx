@@ -83,7 +83,7 @@ const Login = () => {
               </div>
             </div>
             <button
-              className="py-3 lg:py-2 px-6 md:mt-5 bg-buttonYellow rounded-full text-[18px] sm:text-[20px] lg:text-[22px] shadow-md shadow-gray-400"
+              className="py-3 lg:py-2 px-6 md:mt-5 bg-buttonYellow rounded-full text-[18px] sm:text-[20px] lg:text-[22px] shadow-md shadow-gray-400 transform active:scale-90"
               onClick={loginUser}
             >
               Login

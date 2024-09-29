@@ -32,7 +32,7 @@ const ActivityContent = ({ tab }: { tab: ActivityType }) => {
   const [likedJokes, setLikedJokes] = useState<Joke[]>([]);
   const [dislikedJokes, setDislikedJokes] = useState<Joke[]>([]);
 
-  const [selectedJoke, setSelectedJoke] =useState<Joke | null>(null);
+  // const [selectedJoke, setSelectedJoke] =useState<Joke | null>(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const jokesPerPage = 4;
@@ -136,7 +136,7 @@ const ActivityContent = ({ tab }: { tab: ActivityType }) => {
       </div>
 
 
-      <div className="mt-5 text-white">
+      <div className="my-10 text-white">
         Page {currentPage} of {totalPages}
       </div>
     </div>

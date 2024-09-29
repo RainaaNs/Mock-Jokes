@@ -21,7 +21,7 @@ const DislikesCard = ({ text }: any) => {
           alt="Jokes img"
           className="w-10 h-10 md:w-20 md:h-20"
         />
-        <p className="text-[13px] md:text-base pr-1">{text}</p>
+        <p className="text-[13px] md:text-base pr-1 cursor-pointer">{text}</p>
       </div>
       <img src={Emoji} alt="Jokes img" className="w-7 h-7 md:w-16 md:h-16" />
     </div>

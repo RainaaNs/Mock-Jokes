@@ -13,14 +13,19 @@ const ActivityPage = () => {
         className="fixed bg-cover bg-center h-full w-full overflow-auto"
         style={{ backgroundImage: `url(${background})` }}
       >
-        <div className="relative z-10 h-full pt-24 md:pt-36 w-[90%] md:w-1/2 mx-auto flex  ">
+        <div className="relative z-10 h-full pt-24 md:pt-36 w-[90%] md:w-1/2 mx-auto flex">
           <div className="flex flex-col w-screen">
+
+            <div className="text-white text-center text-[22px] mb-[30px] block md:hidden">
+              <p>Account Activity</p>
+            </div>
+
             {/* Likes/dislikes panel div */}
             <div className="flex flex-col">
               <div className="grid grid-cols-2 text-white text-xl tab-buttons">
                 <button
                   onClick={() => setTab("like")}
-                  className={`col-span-1 text-center cursor-pointer ${
+                  className={`col-span-1 text-center cursor-pointer text-[16px] md:text-[22px] md:pb-1 ${
                     tab === "like"
                       ? "border-b-4 w-[100px] md:w-auto border-buttonYellow text-buttonYellow"
                       : "border-b-2 md:w-auto border-buttonYellow"
@@ -30,7 +35,7 @@ const ActivityPage = () => {
                 </button>
                 <button
                   onClick={() => setTab("dislike")}
-                  className={`col-span-1 text-center cursor-pointer ${
+                  className={`col-span-1 text-center cursor-pointer text-[16px] md:text-[22px] md:pb-1 ${
                     tab === "dislike"
                       ? "border-b-4 w-[100px] md:w-auto border-buttonYellow text-buttonYellow"
                       : "border-b-2 border-buttonYellow"
