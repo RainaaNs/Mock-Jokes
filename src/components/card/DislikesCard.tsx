@@ -14,7 +14,7 @@ const getRandomImage = (images: string[]) => {
 
 const DislikesCard = ({ text }: any) => {
   return (
-    <div className="flex items-center p-2 justify-between w-full text-white">
+    <div className="flex items-center p-2 justify-between w-full text-white mb-[-4px] md:mb-0">
       <div className="flex gap-4 items-center">
         <img
           src={getRandomImage(dislikeImages)}

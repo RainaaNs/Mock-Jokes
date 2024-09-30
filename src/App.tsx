@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Details from "./components/Details";
-import HomePage from "./components/HomePage";
-import SignUp from "./components/SignUp";
-import Login from "./components/Login";
-import ActivityPage from "./components/ActivityPage";
+import Details from "./components/pages/Details";
+import HomePage from "./components/pages/HomePage";
+import SignUp from "./components/pages/SignUp";
+import Login from "./components/pages/Login";
+import ActivityPage from "./components/pages/ActivityPage";
 
 function App() {
   return (

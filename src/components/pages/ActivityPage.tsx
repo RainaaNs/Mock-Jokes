@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import ActivityContent from "./activity/index";
-import { ActivityType } from "../interface/activity.interface";
-
-import background from "../assets/background.jpg";
+import ActivityContent from "../activity/index";
+import { ActivityType } from "../../interface/activity.interface";
+import background from "../../../src/assets/background.jpg";
 
 const ActivityPage = () => {
   const [tab, setTab] = useState<ActivityType>("like");
@@ -15,7 +14,6 @@ const ActivityPage = () => {
       >
         <div className="relative z-10 h-full pt-24 md:pt-36 w-[90%] md:w-1/2 mx-auto flex">
           <div className="flex flex-col w-screen">
-
             <div className="text-white text-center text-[22px] mb-[30px] block md:hidden">
               <p>Account Activity</p>
             </div>
@@ -27,8 +25,8 @@ const ActivityPage = () => {
                   onClick={() => setTab("like")}
                   className={`col-span-1 text-center cursor-pointer text-[16px] md:text-[22px] md:pb-1 ${
                     tab === "like"
-                      ? "border-b-4 w-[100px] md:w-auto border-buttonYellow text-buttonYellow"
-                      : "border-b-2 md:w-auto border-buttonYellow"
+                      ? "border-b-4 w-[80px] md:w-auto border-buttonYellow text-buttonYellow"
+                      : "border-b-2 w-1/2 md:w-auto border-buttonYellow"
                   } w-full`}
                 >
                   Likes

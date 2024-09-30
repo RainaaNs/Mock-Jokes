@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchJokes, Joke } from "../api/jokeApi";
-import pepe from "../assets/Pepe.png";
-import left from "../assets/left.png";
-import right from "../assets/right.png";
-import background from "../assets/background.jpg";
+import { fetchJokes, Joke } from "../../api/jokeApi";
+import pepe from "../../assets/Pepe.png";
+import left from "../../assets/left.png";
+import right from "../../assets/right.png";
+import background from "../../assets/background.jpg";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
@@ -197,7 +197,7 @@ const HomePage = () => {
               </div>
             </div>
             {isVeryFunny && (
-              <div className="z-10 w-1/6 absolute xl:right-[200px] md:bottom-[100px] top-[170px] md:top-[400px] right-[60px] md:right-[200px] flex flex-col items-center transform rotate-12">
+              <div className="z-10 w-1/6 absolute xl:right-[170px] md:bottom-[100px] top-[170px] md:top-[400px] right-[60px] md:right-[200px] flex flex-col items-center transform rotate-12">
                 <p className="font-slackey text-xl text-center text-white">
                   Laughter is
                   <br />

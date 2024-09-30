@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import background from "../assets/background.jpg";
+import background from "../../assets/background.jpg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom"; // Use this if you're using React Router for navigation
 
@@ -121,7 +121,7 @@ const SignUp = () => {
               </div>
               <button
                 type="submit"
-                className="mt-4 py-2 px-6 bg-buttonYellow rounded-full text-[18px] sm:text-[20px] lg:text-[22px] shadow-md shadow-gray-400"
+                className="mt-4 py-2 px-6 bg-buttonYellow rounded-full text-[18px] sm:text-[20px] lg:text-[22px] shadow-md shadow-gray-400 transform active:scale-90"
               >
                 Create Account
               </button>
