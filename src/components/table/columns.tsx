@@ -1,16 +1,14 @@
-// src/components/columns.ts
-import { TableColumn } from 'react-data-table-component';
-import { FaTrashAlt, FaSyncAlt } from 'react-icons/fa'; // Icons for actions
 
-// Define the structure of the JokeRow interface
+import { TableColumn } from 'react-data-table-component';
+import { FaTrashAlt, FaSyncAlt } from 'react-icons/fa';
+
 interface JokeRow {
   title: string;
-  dateAdded: string;
+  content: string;
   likes: number;
   dislikes: number;
 }
 
-// Define jokeColumns using a specific structure without generics
 export const jokeColumns: TableColumn<JokeRow>[] = [
   {
     name: 'Joke Title',
@@ -19,8 +17,8 @@ export const jokeColumns: TableColumn<JokeRow>[] = [
     grow: 2,
   },
   {
-    name: 'Date Added',
-    selector: (row) => row.dateAdded,
+    name: 'Content',
+    selector: (row) => row.content,
     sortable: true,
   },
   {

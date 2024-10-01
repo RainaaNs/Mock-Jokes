@@ -12,7 +12,7 @@ const JokeTable = () => {
   const filteredData = data.filter(
     (item) =>
       item.title.toLowerCase().includes(filterText.toLowerCase()) ||
-      item.dateAdded.toLowerCase().includes(filterText.toLowerCase())
+      item.content.toLowerCase().includes(filterText.toLowerCase())
   );
 
   const handleAddJoke = () => {
