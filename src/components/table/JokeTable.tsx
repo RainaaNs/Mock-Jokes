@@ -1,14 +1,12 @@
-// src/components/JokeTable.tsx
 import React, { useState } from 'react';
-import CustomTable from './CustomTable'; // Reusable component
-import { jokeColumns } from './columns'; // Import joke-specific columns
-import { jokeData, JokeRow } from './data'; // Import joke-specific data
+import CustomTable from './CustomTable'; 
+import { jokeColumns } from './columns'; 
+import { jokeData, JokeRow } from './data'; 
 
 const JokeTable = () => {
   const [filterText, setFilterText] = useState('');
   const [data, setData] = useState<JokeRow[]>(jokeData);
 
-  
 
   // Filter the data based on the search input
   const filteredData = data.filter(

@@ -32,7 +32,7 @@ const CustomTable = <T extends object>({
   const closeModal = () => setIsModalVisible(false);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 mt-4 md:mt-6 ">
       {/* Table header with title and search */}
       <div className="flex items-center mb-4 justify-between">
         {title && <h1 className="text-3xl font-semibold text-gray-600">{title}</h1>}

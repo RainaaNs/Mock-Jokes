@@ -1,13 +1,10 @@
 
 import { TableColumn } from 'react-data-table-component';
 import { FaTrashAlt, FaSyncAlt } from 'react-icons/fa';
+import { JokeRow, usersRow } from './data';
 
-interface JokeRow {
-  title: string;
-  content: string;
-  likes: number;
-  dislikes: number;
-}
+
+
 
 export const jokeColumns: TableColumn<JokeRow>[] = [
   {
@@ -49,4 +46,26 @@ export const jokeColumns: TableColumn<JokeRow>[] = [
       </div>
     ),
   },
+];
+
+export const usersColumns: TableColumn<usersRow>[] = [
+  {
+    name: 'Joke Title',
+    selector: (row) => row.username,
+    sortable: true,
+    grow: 2,
+  },
+  {
+    name: 'Likes',
+    selector: (row) => row.likes,
+    sortable: true,
+    cell: (row) => <span className="text-green-500">{row.likes}</span>,
+  },
+  {
+    name: 'Dislikes',
+    selector: (row) => row.dislikes,
+    sortable: true,
+    cell: (row) => <span className="text-red-500">{row.dislikes}</span>,
+  },
+ 
 ];
