@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import ActivityContent from "../activity/index";
-import { ActivityType } from "../../interface/activity.interface";
-import background from "../../../src/assets/background.jpg";
+
+
+import background from "../assets/background.jpg";
+import ActivityContent from "../components/activity";
+import { ActivityType } from "../interface/activity.interface";
 
 const ActivityPage = () => {
   const [tab, setTab] = useState<ActivityType>("like");

@@ -13,6 +13,7 @@ module.exports = {
       colors:{
         borderOrange: '#F18C20',
         buttonYellow:'#FFF200',
+        activeNav: '#F18C20',
       }
     },
   },

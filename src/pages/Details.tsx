@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import background from "../../assets/background.jpg";
-import left from "../../assets/left.png";
+import background from "../assets/background.jpg";
+import left from "../assets/left.png";
 import { useLocation } from "react-router-dom";
 import Cookies from "universal-cookie";
 

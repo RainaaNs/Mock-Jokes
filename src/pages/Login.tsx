@@ -1,5 +1,5 @@
 import { useState } from "react";
-import background from "../../assets/background.jpg";
+import background from "../assets/background.jpg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Cookies from "universal-cookie";
 import { Link } from "react-router-dom"; // Use this if you're using React Router for navigation

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchJokes, Joke } from "../../api/jokeApi";
-import pepe from "../../assets/Pepe.png";
-import left from "../../assets/left.png";
-import right from "../../assets/right.png";
-import background from "../../assets/background.jpg";
+
+import pepe from "../assets/Pepe.png";
+import left from "../assets/left.png";
+import right from "../assets/right.png";
+import background from "../assets/background.jpg";
 import Cookies from "universal-cookie";
+import { fetchJokes, Joke } from "../api/jokeApi";
 
 const cookies = new Cookies();
 
