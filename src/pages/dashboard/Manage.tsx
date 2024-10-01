@@ -1,11 +1,9 @@
-import React from 'react'
+import React from "react";
+import JokeTable from "../../components/table/JokeTable";
+
 
 const Manage = () => {
-  return (
-    <div>
-     
-      </div>
-  )
-}
+  return <JokeTable />;
+};
 
-export default Manage
+export default Manage;
