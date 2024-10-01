@@ -8,6 +8,8 @@ const JokeTable = () => {
   const [filterText, setFilterText] = useState('');
   const [data, setData] = useState<JokeRow[]>(jokeData);
 
+  
+
   // Filter the data based on the search input
   const filteredData = data.filter(
     (item) =>
@@ -18,6 +20,7 @@ const JokeTable = () => {
   const handleAddJoke = () => {
     alert('Add new joke functionality');
   };
+
 
   return (
     <CustomTable<JokeRow>

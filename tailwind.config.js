@@ -14,6 +14,7 @@ module.exports = {
         borderOrange: '#F18C20',
         buttonYellow:'#FFF200',
         activeNav: '#F18C20',
+        hoverNav:'#F6B56F',
         searchColor: '#F1F1F1',
       }
     },

@@ -1,13 +1,12 @@
-import React from 'react'
-import { CiSearch } from "react-icons/ci";
+import React from 'react';
 import { FaUserAlt } from "react-icons/fa";
 
 
 
 const Header = () => {
   return (
-    <div className='pt-5 flex justify-between px-[50px]'>
-      <div className="flex flex-row">
+    <div className='pt-5 flex justify-end px-[50px]'>
+      {/* <div className="flex flex-row">
         <input 
             type="search" 
             name="search" 
@@ -17,7 +16,7 @@ const Header = () => {
             <button type="submit" className="opacity-50 absolute top-8 pl-[15px]">
               <CiSearch/>
             </button>
-      </div>  
+      </div>   */}
 
             {/* admin profile */}
       <div className="flex flex-row space-x-3">

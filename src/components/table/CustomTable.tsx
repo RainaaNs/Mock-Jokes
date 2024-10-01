@@ -1,6 +1,7 @@
 // src/components/CustomTable.tsx
-import React from 'react';
+import React, {useState} from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
+import Modal from '../Modal'; 
 
 interface TableProps<T> {
   columns: TableColumn<T>[];
@@ -24,6 +25,12 @@ const CustomTable = <T extends object>({
   addButtonLabel,
   onAddButtonClick,
 }: TableProps<T>) => {
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const openModal = () => setIsModalVisible(true);
+  const closeModal = () => setIsModalVisible(false);
+
   return (
     <div className="container mx-auto p-4">
       {/* Table header with title and search */}
@@ -42,12 +49,14 @@ const CustomTable = <T extends object>({
           {onAddButtonClick && (
             <button
               className="py-2 px-8 rounded-md border text-base hover:bg-gray-100"
-              onClick={onAddButtonClick}
+              onClick={() => { onAddButtonClick(); openModal(); }}
+              
             >
               {addButtonLabel || 'Add'}
             </button>
           )}
         </div>
+        <Modal isVisible={isModalVisible} onClose={closeModal} />
       </div>
 
       {/* Data Table */}

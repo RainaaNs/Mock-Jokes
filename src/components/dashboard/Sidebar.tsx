@@ -23,8 +23,8 @@ const Sidebar = () => {
         {SIDEBAR_LINKS.map((link, index) => (
           <li
             key={index}
-            className={` font-medium rounded-md py-3 px-5 hover:bg-activeNav hover:text-white ${
-              activeLink === index ? " bg-activeNav text-white" : ""
+            className={` font-medium rounded-md py-3 px-5 hover:border border-activeNav hover:text-black ${
+              activeLink === index ? " hover:none bg-activeNav text-white" : ""
             }`}
           >
             <NavLink
