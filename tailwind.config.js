@@ -14,6 +14,7 @@ module.exports = {
         borderOrange: '#F18C20',
         buttonYellow:'#FFF200',
         activeNav: '#F18C20',
+        searchColor: '#F1F1F1',
       }
     },
   },
