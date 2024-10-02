@@ -1,12 +1,14 @@
 import { TableColumn } from 'react-data-table-component';
 import { FaTrashAlt} from 'react-icons/fa';
-import { JokeRow } from './data';
+import { JokeRow, usersRow } from './data';
 import update from '../../assets/update.svg';
 
 interface ColumnProps {
   openDeleteModal: () => void;
   openUpdateModal: () => void;
 }
+
+
 
 export const jokeColumns = ({ openDeleteModal, openUpdateModal }: ColumnProps): TableColumn<JokeRow>[] => [
   {
@@ -48,4 +50,26 @@ export const jokeColumns = ({ openDeleteModal, openUpdateModal }: ColumnProps): 
       </div>
     ),
   },
+];
+
+export const usersColumns: TableColumn<usersRow>[] = [
+  {
+    name: 'Joke Title',
+    selector: (row) => row.username,
+    sortable: true,
+    grow: 2,
+  },
+  {
+    name: 'Likes',
+    selector: (row) => row.likes,
+    sortable: true,
+    cell: (row) => <span className="text-green-500">{row.likes}</span>,
+  },
+  {
+    name: 'Dislikes',
+    selector: (row) => row.dislikes,
+    sortable: true,
+    cell: (row) => <span className="text-red-500">{row.dislikes}</span>,
+  },
+ 
 ];

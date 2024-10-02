@@ -27,7 +27,7 @@ const CustomTable = <T extends object>({
 
   
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 mt-4 md:mt-6 ">
       {/* Table header with title and search */}
       <div className="flex items-center mb-4 justify-between">
         {title && <h1 className="text-2xl font-semibold text-gray-600">{title}</h1>}
