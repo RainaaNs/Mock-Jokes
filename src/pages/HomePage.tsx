@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 import pepe from "../assets/Pepe.png";
 import left from "../assets/left.png";
@@ -115,6 +116,7 @@ const HomePage = () => {
 
   return (
     <>
+    <Navbar />
       {token ? (
         <div className="relative w-full min-h-screen overflow-hidden font-poppins">
           <div

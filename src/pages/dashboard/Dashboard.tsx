@@ -2,8 +2,10 @@ import React from 'react';
 import crown from '../../assets/crown.svg';
 import heartbreak from '../../assets/heartbreak.svg';
 import love from '../../assets/love.svg';
+import { useStatistics } from '../../components/hooks/usersQL';
 
 const Dashboard = () => {
+  const {statistics} = useStatistics()
   return (
     <div className='px-12 py-[30px]'>
 
@@ -23,7 +25,7 @@ const Dashboard = () => {
             </span><span>Total Number of Jokes</span>
           </div>
           <div className='flex flex-col'>
-            <span className='text-[66px] md:text-[58px] xl:text-[64px] text-activeNav'>5,000</span><span className='opacity-50'>In Database</span>
+            <span className='text-[66px] md:text-[58px] xl:text-[64px] text-activeNav'>{statistics?.getTotalJokes || 0}</span><span className='opacity-50'>In Database</span>
           </div>
         </div>
 
@@ -36,7 +38,7 @@ const Dashboard = () => {
             </span><span>Total Number of Likes</span>
           </div>
           <div className='flex flex-col'>
-            <span className='text-[66px] md:text-[58px] xl:text-[64px] text-activeNav'>5,000</span><span className='opacity-50'>Overall</span>
+            <span className='text-[66px] md:text-[58px] xl:text-[64px] text-activeNav'>{statistics?.getTotalLikes || 0}</span><span className='opacity-50'>Overall</span>
           </div>
         </div>
 
@@ -49,7 +51,7 @@ const Dashboard = () => {
             </span><span>Total Number of Dislikes</span>
           </div>
           <div className='flex flex-col'>
-            <span className='text-[66px] md:text-[58px] xl:text-[64px] text-activeNav'>5,000</span><span className='opacity-50'>Overall</span>
+            <span className='text-[66px] md:text-[58px] xl:text-[64px] text-activeNav'>{statistics?.getTotalDislikes || 0}</span><span className='opacity-50'>Overall</span>
           </div>
         </div>
         <div className='flex flex-col justify-between border-t-[1px] border-activeNav h-[262px] rounded-[30px] shadow-2xl p-6'>
@@ -80,7 +82,7 @@ const Dashboard = () => {
             </span><span>Average Number of Likes</span>
           </div>
           <div className='flex flex-col'>
-            <span className='text-[66px] md:text-[62px] xl:text-[64px] text-activeNav'>500</span><span className='opacity-50'>Overall</span>
+            <span className='text-[66px] md:text-[62px] xl:text-[64px] text-activeNav'>{statistics?.getAverageLikes|| 0}</span><span className='opacity-50'>Overall</span>
           </div>
         </div>
 
@@ -93,7 +95,7 @@ const Dashboard = () => {
             </span><span>Average Number of DisLikes</span>
           </div>
           <div className='flex flex-col'>
-            <span className='text-[66px] md:text-[62px] xl:text-[64px] text-activeNav'>500</span><span className='opacity-50'>Overall</span>
+            <span className='text-[66px] md:text-[62px] xl:text-[64px] text-activeNav'>{statistics?.getAverageDislikes || 0}</span><span className='opacity-50'>Overall</span>
           </div>
         </div>
 
@@ -106,7 +108,7 @@ const Dashboard = () => {
             </span><span>Number of Registered Users</span>
           </div>
           <div className='flex flex-col'>
-            <span className='text-[66px] md:text-[62px] xl:text-[64px] text-activeNav'>500</span><span className='opacity-50'>In Database</span>
+            <span className='text-[66px] md:text-[62px] xl:text-[64px] text-activeNav'>{statistics?.getTotalUsers || 0}</span><span className='opacity-50'>In Database</span>
           </div>
         </div>
       </div>

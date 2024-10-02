@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import ActivityPage from "./pages/ActivityPage";
@@ -14,7 +13,6 @@ import Users from "./pages/dashboard/Users";
 function App() {
   return (
     <div>
-      {/* <Navbar /> */}
       <Routes>
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/login" element={<Login />} />

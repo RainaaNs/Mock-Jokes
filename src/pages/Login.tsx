@@ -3,6 +3,7 @@ import background from "../assets/background.jpg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Cookies from "universal-cookie";
 import { Link } from "react-router-dom"; // Use this if you're using React Router for navigation
+import Navbar from "../components/Navbar";
 
 const cookies = new Cookies();
 
@@ -45,6 +46,7 @@ const Login = () => {
 
   return (
     <div className="relative w-full min-h-screen font-poppins">
+      <Navbar />
       <div
         className="absolute bg-cover bg-center h-full w-full"
         style={{ backgroundImage: `url(${background})` }}

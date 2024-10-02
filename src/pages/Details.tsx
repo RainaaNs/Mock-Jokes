@@ -3,6 +3,7 @@ import background from "../assets/background.jpg";
 import left from "../assets/left.png";
 import { useLocation } from "react-router-dom";
 import Cookies from "universal-cookie";
+import Navbar from "../components/Navbar";
 
 const cookies = new Cookies();
 
@@ -65,6 +66,7 @@ const Details = () => {
 
   return (
     <>
+    <Navbar />
       {token && (
         <div className="relative w-full min-h-screen font-poppins">
           <div

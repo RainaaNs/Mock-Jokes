@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Navbar from "../components/Navbar";
 
 import background from "../assets/background.jpg";
 import ActivityContent from "../components/activity";
@@ -10,6 +10,7 @@ const ActivityPage = () => {
 
   return (
     <div className="relative w-full h-screen font-poppins">
+      <Navbar />
       <div
         className="fixed bg-cover bg-center h-full w-full overflow-auto"
         style={{ backgroundImage: `url(${background})` }}

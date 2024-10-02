@@ -5,7 +5,7 @@ import { usersColumns } from "./columns";
 
 const UserTable = () => {
   const [filterText, setFilterText] = useState("");
-  const [data, setData] = useState<usersRow[]>(userData);
+  const [data] = useState<usersRow[]>(userData);
 
   // Filter the data based on the search input
   const filteredData = data.filter((item) =>

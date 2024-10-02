@@ -1,16 +1,19 @@
 import { TableColumn } from 'react-data-table-component';
 import { FaTrashAlt} from 'react-icons/fa';
-import { JokeRow, usersRow } from './data';
+import { 
+  // JokeRow,
+   usersRow } from './data';
 import update from '../../assets/update.svg';
+import { Joke } from '../hooks/usersQL';
 
 interface ColumnProps {
   openDeleteModal: () => void;
-  openUpdateModal: () => void;
+  openUpdateModal: (row:Joke) => void;
 }
 
 
 
-export const jokeColumns = ({ openDeleteModal, openUpdateModal }: ColumnProps): TableColumn<JokeRow>[] => [
+export const jokeColumns = ({ openDeleteModal, openUpdateModal }: ColumnProps): TableColumn<Joke>[] => [
   {
     name: 'Joke Title',
     selector: (row) => row.title,
@@ -37,11 +40,11 @@ export const jokeColumns = ({ openDeleteModal, openUpdateModal }: ColumnProps): 
   {
     name: 'Action',
     button: true,
-    cell: () => (
+    cell: (row) => (
       <div className="flex gap-3 items-center">
         <img src={update} alt='update'
           className="cursor-pointer text-gray-500 hover:text-gray-700"
-          onClick={openUpdateModal}
+          onClick={() => openUpdateModal(row)}
         />
         <FaTrashAlt
           className="cursor-pointer text-red-500 hover:text-red-700"
