@@ -1,24 +1,25 @@
 import React from 'react'
 
-interface ModalProps {
+interface AddModalProps {
     isVisible: boolean; 
     onClose: () => void; 
   }
 
-const Modal: React.FC<ModalProps>  = ({ isVisible, onClose }) => {
+const AddModal: React.FC<AddModalProps>  = ({ isVisible, onClose }) => {
     if (!isVisible) return null;
   return (
     <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center pl-[50px] py-[50px] z-10'>
-        <div className='flex flex-col border rounded-[20px] px-[40px] py-[30px] bg-white'>
+        <div className='flex flex-col border rounded-[20px] px-[40px] pb-[30px] justify-end h-[530px] w-1/2 bg-white'>
+
             <div>
                 <span className='text-[25px] opacity-50'>Add Joke</span>
             </div>
 
             {/* input fields */}
-            <div className='flex flex-col mt-[80px] space-y-6'>
+            <div className='flex flex-col mt-[50px] space-y-6'>
 
                 {/* joke title */}
-                <div className='w-[592px] h-[79px] border border-gray-300 rounded-[14px] flex items-center'>
+                <div className='w-full h-[79px] border border-gray-300 rounded-[14px] flex items-center'>
                     <textarea
                     name='title'
                     placeholder='Joke Title'
@@ -27,7 +28,7 @@ const Modal: React.FC<ModalProps>  = ({ isVisible, onClose }) => {
                 </div>
                 
                 {/* joke content */}
-                <div className='w-[592px] h-[142px] border border-gray-300 rounded-[17px] py-4'>
+                <div className='w-full h-[142px] border border-gray-300 rounded-[17px] py-4'>
                     <textarea
                     name='title'
                     placeholder='Joke Body'
@@ -35,22 +36,16 @@ const Modal: React.FC<ModalProps>  = ({ isVisible, onClose }) => {
                     />
                 </div>
             </div>
-            <div className='flex flex-row-reverse justify-between px-10 py-[30px]'>
-                <div className=''>
-                    <button className='text-white bg-activeNav text-center flex items-center px-6 py-3 font-bold rounded-[10px]'>
+            <div className='flex flex-row-reverse justify-between md:gap-0 px:5 md:px-8 py-[30px]'>
+                <div>
+                    <button className='text-white bg-activeNav text-center flex items-center justify-center p-2 md:px-6 md:py-3 font-bold rounded-[10px]'>
                         Add Joke
                     </button>
                 </div>
                 
                 <div>
-                    <button
-                    onClick={onClose}
-                    className="absolute top-16 right-[370px] text-xl text-gray-400"
-                    >
-                    &times;
-                    </button>
-                    <button className="border-activeNav border text-black px-4 py-2 rounded-lg" onClick={onClose}>
-                    Close Modal
+                    <button className="border-activeNav border text-black p-2 md:px-6 md:py-3 rounded-lg" onClick={onClose}>
+                    Cancel
                     </button>
                 </div>
             </div>
@@ -59,7 +54,7 @@ const Modal: React.FC<ModalProps>  = ({ isVisible, onClose }) => {
   )
 }
 
-export default Modal
+export default AddModal;
 
 
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import { FaUserAlt } from "react-icons/fa";
+import admin from '../../assets/Admin.svg';
 
 
 
 const Header = () => {
   return (
-    <div className='pt-5 flex justify-end px-[50px]'>
+    <div className='pt-5 flex justify-end mr-[90px] md:mr-[70px] xl:mr-[50px]'>
       {/* <div className="flex flex-row">
         <input 
             type="search" 
@@ -19,9 +19,9 @@ const Header = () => {
       </div>   */}
 
             {/* admin profile */}
-      <div className="flex flex-row space-x-3">
-        <div className='rounded-full border-activeNav border-[1px] w-[50px] h-[50px] flex items-center justify-center'>
-          <FaUserAlt/>
+      <div className="flex flex-row space-x-3 items-center">
+        <div className='w-[40px] h-[40px] '>
+          <img src={admin}  alt="admin"/>
         </div>
         <div className='flex flex-col'>
           <span className='font-bold text-base'>Welcome, Admin</span>

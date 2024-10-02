@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 const Layout = () => {
   return (
     <main>
-      <div className="flex">
+      <div className="flex font-poppins">
         <Sidebar />
         <div className=" w-full ml-20 md:ml-[250px] bg-stone-100 h-full">
           <Header />

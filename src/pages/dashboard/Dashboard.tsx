@@ -12,7 +12,7 @@ const Dashboard = () => {
       </div>
 
       {/* first parent grid */}
-      <div className='grid grid-cols-4 space-x-7 pt-[20px]'>
+      <div className='grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-7 xl:space-x-2 pt-[20px]'>
 
         <div className='flex flex-col justify-between border-t-[1px] border-activeNav h-[262px] rounded-[30px] shadow-2xl p-6'>
           <div className='flex flex-col opacity-50'>
@@ -20,10 +20,10 @@ const Dashboard = () => {
               <div className='bg-stone-200 w-[30px] h-[30px] rounded-full flex items-center justify-center'>
                 <img src={crown} alt="crown"/>
               </div>
-            </span><span>Total number of jokes</span>
+            </span><span>Total Number of Jokes</span>
           </div>
           <div className='flex flex-col'>
-            <span className='text-[74px] text-activeNav'>5,000</span><span className='opacity-50'>In Database</span>
+            <span className='text-[66px] md:text-[58px] xl:text-[64px] text-activeNav'>5,000</span><span className='opacity-50'>In Database</span>
           </div>
         </div>
 
@@ -33,10 +33,10 @@ const Dashboard = () => {
               <div className='bg-stone-200 w-[30px] h-[30px] rounded-full flex items-center justify-center'>
                 <img src={love} alt="crown"/>
               </div>
-            </span><span>Total number of jokes</span>
+            </span><span>Total Number of Likes</span>
           </div>
           <div className='flex flex-col'>
-            <span className='text-[74px] text-activeNav'>5,000</span><span className='opacity-50'>In Database</span>
+            <span className='text-[66px] md:text-[58px] xl:text-[64px] text-activeNav'>5,000</span><span className='opacity-50'>Overall</span>
           </div>
         </div>
 
@@ -46,10 +46,10 @@ const Dashboard = () => {
               <div className='bg-stone-200 w-[30px] h-[30px] rounded-full flex items-center justify-center'>
                 <img src={love} alt="crown"/>
               </div>
-            </span><span>Total number of jokes</span>
+            </span><span>Total Number of Dislikes</span>
           </div>
           <div className='flex flex-col'>
-            <span className='text-[74px] text-activeNav'>5,000</span><span className='opacity-50'>In Database</span>
+            <span className='text-[66px] md:text-[58px] xl:text-[64px] text-activeNav'>5,000</span><span className='opacity-50'>Overall</span>
           </div>
         </div>
         <div className='flex flex-col justify-between border-t-[1px] border-activeNav h-[262px] rounded-[30px] shadow-2xl p-6'>
@@ -58,10 +58,10 @@ const Dashboard = () => {
               <div className='bg-stone-200 w-[30px] h-[30px] rounded-full flex items-center justify-center'>
                 <img src={heartbreak} alt="crown"/>
               </div>
-            </span><span>Total number of jokes</span>
+            </span><span>Total Number of Admins</span>
           </div>
           <div className='flex flex-col'>
-            <span className='text-[74px] text-activeNav'>500</span><span className='opacity-50'>In Database</span>
+            <span className='text-[66px] md:text-[58px] xl:text-[64px] text-activeNav'>1</span><span className='opacity-50'>Overall</span>
           </div>
         </div>
       </div>
@@ -70,34 +70,34 @@ const Dashboard = () => {
       <div className='border-t-[1px] opacity-100 mt-[10px]'></div>
 
       {/* second parent grid */}
-      <div className='grid grid-cols-2 gap-7 pt-[30px]'>
-        <div className='flex flex-col h-[227px] rounded-[30px] shadow-2xl p-6 border-t-[1px] border-activeNav'>
+      <div className='grid xl:grid-cols-2 md:grid-cols-1 gap-7 pt-[30px]'>
+        <div className='flex flex-col h-[227px] xl:w-auto md:w-5/6 rounded-[30px] shadow-2xl p-6 border-t-[1px] border-activeNav'>
           <div className='flex flex-col opacity-50'>
             <span>
               <div className='bg-stone-200 w-[30px] h-[30px] rounded-full flex items-center justify-center'>
                 <img src={crown} alt="crown"/>
               </div>
-            </span><span>Average Number of Likes Per Day</span>
+            </span><span>Average Number of Likes</span>
           </div>
           <div className='flex flex-col'>
-            <span className='text-[74px] text-activeNav'>500</span><span className='opacity-50'>In a Month</span>
+            <span className='text-[66px] md:text-[62px] xl:text-[64px] text-activeNav'>500</span><span className='opacity-50'>Overall</span>
           </div>
         </div>
 
-        <div className='flex flex-col h-[227px] rounded-[30px] shadow-2xl p-6 border-t-[1px] border-activeNav'>
+        <div className='flex flex-col h-[227px] xl:w-auto md:w-5/6 pl-[30px] rounded-[30px] shadow-2xl p-6 border-t-[1px] border-activeNav'>
           <div className='flex flex-col opacity-50'>
             <span>
               <div className='bg-stone-200 w-[30px] h-[30px] rounded-full flex items-center justify-center'>
                 <img src={crown} alt="crown"/>
               </div>
-            </span><span>Average Number of Likes Per Day</span>
+            </span><span>Average Number of DisLikes</span>
           </div>
           <div className='flex flex-col'>
-            <span className='text-[74px] text-activeNav'>500</span><span className='opacity-50'>In a Year</span>
+            <span className='text-[66px] md:text-[62px] xl:text-[64px] text-activeNav'>500</span><span className='opacity-50'>Overall</span>
           </div>
         </div>
 
-        <div className='flex flex-col h-[227px] rounded-[30px] shadow-2xl p-6 border-t-[1px] border-activeNav'>
+        <div className='flex flex-col h-[227px] xl:w-auto md:w-5/6 rounded-[30px] shadow-2xl p-6 border-t-[1px] border-activeNav'>
           <div className='flex flex-col opacity-50'>
             <span>
               <div className='bg-stone-200 w-[30px] h-[30px] rounded-full flex items-center justify-center'>
@@ -106,7 +106,7 @@ const Dashboard = () => {
             </span><span>Number of Registered Users</span>
           </div>
           <div className='flex flex-col'>
-            <span className='text-[74px] text-activeNav'>500</span><span className='opacity-50'>In Database</span>
+            <span className='text-[66px] md:text-[62px] xl:text-[64px] text-activeNav'>500</span><span className='opacity-50'>In Database</span>
           </div>
         </div>
       </div>

@@ -1,7 +1,6 @@
 // src/components/CustomTable.tsx
-import React, {useState} from 'react';
+import React from 'react';
 import DataTable, { TableColumn } from 'react-data-table-component';
-import Modal from '../Modal'; 
 
 interface TableProps<T> {
   columns: TableColumn<T>[];
@@ -26,16 +25,12 @@ const CustomTable = <T extends object>({
   onAddButtonClick,
 }: TableProps<T>) => {
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const openModal = () => setIsModalVisible(true);
-  const closeModal = () => setIsModalVisible(false);
-
+  
   return (
     <div className="container mx-auto p-4">
       {/* Table header with title and search */}
       <div className="flex items-center mb-4 justify-between">
-        {title && <h1 className="text-3xl font-semibold text-gray-600">{title}</h1>}
+        {title && <h1 className="text-2xl font-semibold text-gray-600">{title}</h1>}
         <div className="flex items-center space-x-4 w-full justify-end ">
           {handleFilter && (
             <input
@@ -49,14 +44,14 @@ const CustomTable = <T extends object>({
           {onAddButtonClick && (
             <button
               className="py-2 px-8 rounded-md border text-base hover:bg-gray-100"
-              onClick={() => { onAddButtonClick(); openModal(); }}
+              onClick={() => { onAddButtonClick();}}
               
             >
               {addButtonLabel || 'Add'}
             </button>
           )}
         </div>
-        <Modal isVisible={isModalVisible} onClose={closeModal} />
+       
       </div>
 
       {/* Data Table */}

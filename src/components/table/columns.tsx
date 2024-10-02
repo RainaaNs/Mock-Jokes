@@ -1,15 +1,14 @@
-
 import { TableColumn } from 'react-data-table-component';
-import { FaTrashAlt, FaSyncAlt } from 'react-icons/fa';
+import { FaTrashAlt} from 'react-icons/fa';
+import { JokeRow } from './data';
+import update from '../../assets/update.svg';
 
-interface JokeRow {
-  title: string;
-  content: string;
-  likes: number;
-  dislikes: number;
+interface ColumnProps {
+  openDeleteModal: () => void;
+  openUpdateModal: () => void;
 }
 
-export const jokeColumns: TableColumn<JokeRow>[] = [
+export const jokeColumns = ({ openDeleteModal, openUpdateModal }: ColumnProps): TableColumn<JokeRow>[] => [
   {
     name: 'Joke Title',
     selector: (row) => row.title,
@@ -36,15 +35,15 @@ export const jokeColumns: TableColumn<JokeRow>[] = [
   {
     name: 'Action',
     button: true,
-    cell: (row) => (
-      <div className="flex gap-2">
-        <FaSyncAlt
+    cell: () => (
+      <div className="flex gap-3 items-center">
+        <img src={update} alt='update'
           className="cursor-pointer text-gray-500 hover:text-gray-700"
-          onClick={() => alert(`Refreshing joke: ${row.title}`)}
+          onClick={openUpdateModal}
         />
         <FaTrashAlt
           className="cursor-pointer text-red-500 hover:text-red-700"
-          onClick={() => alert(`Deleting joke: ${row.title}`)}
+          onClick={openDeleteModal}
         />
       </div>
     ),
