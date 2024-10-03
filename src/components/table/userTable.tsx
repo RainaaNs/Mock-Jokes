@@ -1,27 +1,35 @@
-import React, { useState } from "react";
-import { userData, usersRow } from "./data";
+import React, { useState, useEffect } from "react";
 import CustomTable from "./CustomTable";
 import { usersColumns } from "./columns";
+import {Users, useUsersInfo} from "../hooks/usersQL";
 
 const UserTable = () => {
   const [filterText, setFilterText] = useState("");
-  const [data] = useState<usersRow[]>(userData);
+  const [filterData, setFilterData] = useState<Users[]>([]);
+  const { users, loading, error } = useUsersInfo();
 
-  // Filter the data based on the search input
-  const filteredData = data.filter((item) =>
-    item.username.toLowerCase().includes(filterText.toLowerCase())
-  );
+  useEffect(() => {
+    if (users) {
+      setFilterData(
+        users.filter((item: Users) =>
+          item.username.toLowerCase().includes(filterText.toLowerCase())
+        )
+      );
+    }
+  }, [users, filterText]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
 
   return (
-    <CustomTable<usersRow>
+    <CustomTable<Users>
       columns={usersColumns}
-      data={filteredData}
+      data={filterData}
       filterText={filterText}
       handleFilter={(e) => setFilterText(e.target.value)}
       title="Users"
-      searchPlaceholder="Search jokes..."
-      addButtonLabel="Add Joke"
-      //   onAddButtonClick={handleAddJoke}
+      searchPlaceholder="Search users..."
     />
   );
 };

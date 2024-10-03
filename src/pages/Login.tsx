@@ -29,7 +29,9 @@ const Login = () => {
           if (!data.error) {
             cookies.set("USER-TOKEN", data.token, { path: "/" });
             cookies.set("USER-ID", data.user.id, { path: "/" });
-            window.location.href = "/homepage";
+            let location = ''
+            location = (username === 'admin') ? 'dashboard' : 'homepage'
+            window.location.href = location;
           } else {
             alert(data.error);
           }

@@ -58,12 +58,12 @@ const AddModal: React.FC<AddModalProps> = ({ isVisible, onClose, joke }) => {
           },
         });
         setLoading(false);
-        console.log("updated", data);
+        console.log("Added", data);
         alert("Added");
         onClose();
       } catch (err: any) {
         setLoading(false);
-        throw new Error(err?.message || "Failed to update joke");
+        throw new Error(err?.message || "Failed to add joke");
       }
     }
   };

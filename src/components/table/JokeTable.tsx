@@ -6,13 +6,12 @@ import DeleteModal from "../DeleteModal";
 import { Joke, useFetchJokes } from "../hooks/usersQL";
 
 const JokeTable = () => {
-  const { jokes, loading, refetch } = useFetchJokes();
+  const { jokes, loading,
+    //  refetch 
+    } = useFetchJokes();
 
   const [filterText, setFilterText] = useState("");
-  const [data, 
-    // setData
 
-  ] = useState<Joke[]>(jokes);
   const [filteredData, setFilteredData] = useState<Joke[]>(jokes);
   const [selectedJoke, setSelectedJoke] = useState<Joke | null>(null);
 
@@ -30,8 +29,9 @@ const JokeTable = () => {
     setSelectedJoke(row);
     setIsUpdateModalVisible(true);
   };
+
   const closeUpdateModal = () => {
-    refetch();
+    // refetch();
     setSelectedJoke(null);
     setIsUpdateModalVisible(false);
   };
@@ -47,15 +47,27 @@ const JokeTable = () => {
   //   }
   // }, [jokes, loading]);
 
+  // useEffect(() => {
+  //   setFilteredData(
+  //     data.filter(
+  //       (item) =>
+  //         item.title.toLowerCase().includes(filterText.toLowerCase()) ||
+  //         item.content.toLowerCase().includes(filterText.toLowerCase())
+  //     )
+  //   );
+  // }, [data, filterText]);
+
   useEffect(() => {
-    setFilteredData(
-      data.filter(
-        (item) =>
-          item.title.toLowerCase().includes(filterText.toLowerCase()) ||
-          item.content.toLowerCase().includes(filterText.toLowerCase())
-      )
-    );
-  }, [data, filterText]);
+    if (!loading && jokes) {
+      setFilteredData(
+        jokes.filter(
+          (item) =>
+            item.title.toLowerCase().includes(filterText.toLowerCase()) ||
+            item.content.toLowerCase().includes(filterText.toLowerCase())
+        )
+      );
+    }
+  }, [jokes, loading, filterText]);
 
   if (loading)
     return (
@@ -75,7 +87,10 @@ const JokeTable = () => {
         addButtonLabel="Add Joke"
         onAddButtonClick={openAddModal}
       />
-      <AddModal isVisible={isAddModalVisible} onClose={closeAddModal} />
+      <AddModal 
+        isVisible={isAddModalVisible} 
+        onClose={closeAddModal} 
+      />
       <DeleteModal
         isVisible={isDeleteModalVisible}
         onClose={closeDeleteModal}

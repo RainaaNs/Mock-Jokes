@@ -12,6 +12,17 @@ export const GET_JOKES_QUERY = gql`
   }
 `;
 
+export const GET_USERS_QUERY = gql`
+query Users {
+  users {
+    username
+    likedJokes
+    dislikedJokes
+    id
+  }
+}
+`;
+
 export const ADD_JOKE_MUTATION = gql`
   mutation CreateJoke($joke: JokeInput!) {
     createJoke(joke: $joke) {

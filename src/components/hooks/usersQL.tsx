@@ -4,8 +4,9 @@ import {
   DELETE_JOKE_MUTATION,
   GET_JOKES_QUERY,
   UPDATE_JOKE_MUTATION,
+  GET_USERS_QUERY,
+  ADD_JOKE_MUTATION,
 } from "../../api/gql";
-import { ADD_JOKE_MUTATION } from "../../api/gql";
 
 export interface Joke {
   id: string;
@@ -24,11 +25,15 @@ export interface Overviewstats {
   getAverageDislikes: number;
 }
 
-export const useFetchJokes = () => {
-  const { loading, error, data, refetch } = useQuery<{
-    getReturnedJokes: Joke[];
-  }>(GET_JOKES_QUERY);
+export interface Users {
+  username:string;
+  likedJokes:number;
+  dislikedJokes:number;
+  id:string; 
+}
 
+export const useFetchJokes = () => {
+  const { loading, error, data, refetch } = useQuery<{getReturnedJokes: Joke[];}>(GET_JOKES_QUERY);
   console.log(data);
   return {
     jokes: data?.getReturnedJokes || [],
@@ -102,4 +107,14 @@ export const useStatistics = () => {
   };
 };
 
+export const useUsersInfo = () => {
+  const { loading, error, data, refetch } = useQuery<{getReturnedUsers: Users[];}>(GET_USERS_QUERY);
 
+console.log(data);
+return {
+  jokes: data?.getReturnedUsers || [],
+  loading,
+  error: error?.message || null,
+  refetch,
+};
+};

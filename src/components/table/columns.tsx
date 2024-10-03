@@ -1,16 +1,13 @@
 import { TableColumn } from 'react-data-table-component';
 import { FaTrashAlt} from 'react-icons/fa';
-import { 
-  // JokeRow,
-   usersRow } from './data';
+// import {  JokeRow, usersRow } from './data';
 import update from '../../assets/update.svg';
-import { Joke } from '../hooks/usersQL';
+import { Joke, Users } from '../hooks/usersQL';
 
 interface ColumnProps {
-  openDeleteModal: () => void;
+  openDeleteModal: (row:Joke) => void;
   openUpdateModal: (row:Joke) => void;
 }
-
 
 
 export const jokeColumns = ({ openDeleteModal, openUpdateModal }: ColumnProps): TableColumn<Joke>[] => [
@@ -48,14 +45,14 @@ export const jokeColumns = ({ openDeleteModal, openUpdateModal }: ColumnProps): 
         />
         <FaTrashAlt
           className="cursor-pointer text-red-500 hover:text-red-700"
-          onClick={openDeleteModal}
+          onClick={() => openDeleteModal(row)}
         />
       </div>
     ),
   },
 ];
 
-export const usersColumns: TableColumn<usersRow>[] = [
+export const usersColumns: TableColumn<Users>[] = [
   {
     name: 'Joke Title',
     selector: (row) => row.username,
@@ -64,15 +61,15 @@ export const usersColumns: TableColumn<usersRow>[] = [
   },
   {
     name: 'Likes',
-    selector: (row) => row.likes,
+    selector: (row) => row.likedJokes,
     sortable: true,
-    cell: (row) => <span className="text-green-500">{row.likes}</span>,
+    cell: (row) => <span className="text-green-500">{row.likedJokes}</span>,
   },
   {
     name: 'Dislikes',
-    selector: (row) => row.dislikes,
+    selector: (row) => row.dislikedJokes,
     sortable: true,
-    cell: (row) => <span className="text-red-500">{row.dislikes}</span>,
+    cell: (row) => <span className="text-red-500">{row.dislikedJokes}</span>,
   },
  
 ];
