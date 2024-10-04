@@ -40,10 +40,13 @@ const Sidebar = () => {
       </ul>
 
       <div className=" w-full absolute bottom-5 left-0 px-4 py-2 cursor-pointer text-center">
-        <div className="flex justify-center md:justify-start items-center md:space-x-5">
+       <NavLink to="/login">
+        <div 
+          className="flex justify-center md:justify-start items-center md:space-x-5">
           <IoLogOutSharp />
           <p className="text-sm font-semibold hidden md:flex ">Log Out</p>
         </div>
+        </NavLink>
       </div>
     </div>
   );

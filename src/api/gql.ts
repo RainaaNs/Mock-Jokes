@@ -23,6 +23,8 @@ query Users {
 }
 `;
 
+
+
 export const ADD_JOKE_MUTATION = gql`
   mutation CreateJoke($joke: JokeInput!) {
     createJoke(joke: $joke) {
@@ -34,7 +36,7 @@ export const ADD_JOKE_MUTATION = gql`
 `;
 
 export const UPDATE_JOKE_MUTATION = gql`
-  mutation UpdateJoke($jokeId: Int!, $joke: UpdatedJokeInput!) {
+  mutation UpdateJoke($jokeId: ID!, $joke: UpdatedJokeInput!) {
     updateJoke(jokeId: $jokeId, joke: $joke) {
       content
       title
@@ -43,13 +45,11 @@ export const UPDATE_JOKE_MUTATION = gql`
 `;
 
 export const DELETE_JOKE_MUTATION = gql`
-  mutation DeleteJoke($id: ID!) {
-    deleteJoke(id: $id) {
-      title
-      content
-    }
-  }
+mutation DeleteJoke($jokeId: ID!) {
+  deleteJoke(jokeId: $jokeId)
+}
 `;
+
 
 export const DASHBOARD_OVERVIEW = gql`
   query Query {

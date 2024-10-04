@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CustomTable from "./CustomTable";
 import { usersColumns } from "./columns";
-import {Users, useUsersInfo} from "../hooks/usersQL";
+import { Users, useUsersInfo } from "../hooks/usersQL";
 
 const UserTable = () => {
   const [filterText, setFilterText] = useState("");
@@ -18,9 +18,21 @@ const UserTable = () => {
     }
   }, [users, filterText]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
+  if (loading) {
+    return (
+      <p className="h-screen flex items-center justify-center w-full">
+        Fetching users please....
+      </p>
+    );
+  }
+  
+  if (error) {
+    return (
+      <p className="h-screen flex items-center justify-center w-full">
+        Error fetching users: {error}
+      </p>
+    );
+  }
 
   return (
     <CustomTable<Users>

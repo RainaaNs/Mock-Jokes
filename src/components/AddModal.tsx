@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { Joke, 
-  // useUpdateJoke
- } from "./hooks/usersQL";
+import { Joke } from "./hooks/usersQL";
 import { useMutation } from "@apollo/client";
 import { ADD_JOKE_MUTATION, UPDATE_JOKE_MUTATION } from "../api/gql";
 
@@ -20,7 +18,9 @@ const AddModal: React.FC<AddModalProps> = ({ isVisible, onClose, joke }) => {
     content: joke?.content || "",
   });
 
-  const handleValueChange = (e: any) => {
+  const handleValueChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
 
     setValues({
@@ -29,25 +29,30 @@ const AddModal: React.FC<AddModalProps> = ({ isVisible, onClose, joke }) => {
     });
   };
 
-  const handleSubmit = async () => {
+  const clearForm = () => {
+    setValues({ title: "", content: "" });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     setLoading(true);
     if (joke) {
       // update
+      console.log(joke.id);
       try {
         const { data } = await updateJoke({
           variables: {
-            jokeId: parseInt(joke.id),
+            jokeId: joke.id,
             joke: values,
           },
         });
-        setLoading(false);
         console.log("updated", data);
+        clearForm();
         alert("Updated");
         onClose();
       } catch (err: any) {
-        setLoading(false);
         console.error(err);
-        throw new Error(err?.message || "Failed to update joke");
+        alert(err?.message || "Failed to update joke");
       }
     } else {
       // create
@@ -57,15 +62,16 @@ const AddModal: React.FC<AddModalProps> = ({ isVisible, onClose, joke }) => {
             joke: values,
           },
         });
-        setLoading(false);
-        console.log("Added", data);
+        console.log("added", data);
+        clearForm();
         alert("Added");
         onClose();
       } catch (err: any) {
-        setLoading(false);
-        throw new Error(err?.message || "Failed to add joke");
+        console.error(err);
+        alert(err?.message || "Failed to add joke");
       }
     }
+    setLoading(false);
   };
 
   if (!isVisible) return null;
@@ -108,16 +114,15 @@ const AddModal: React.FC<AddModalProps> = ({ isVisible, onClose, joke }) => {
               <button
                 type="submit"
                 disabled={loading}
-                onClick={handleSubmit}
                 className="text-white bg-activeNav text-center flex items-center justify-center p-2 md:px-6 md:py-3 font-bold rounded-[10px]"
               >
-                {loading && "Hang on..."}
-                {!loading && <>{joke ? "Update Joke" : "Add Joke"}</>}
+                {loading ? "Hang on..." : joke ? "Update Joke" : "Add Joke"}
               </button>
             </div>
 
             <div>
               <button
+                type="button"
                 className="border-activeNav border text-black p-2 md:px-6 md:py-3 rounded-lg"
                 onClick={onClose}
               >

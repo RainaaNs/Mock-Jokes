@@ -1,12 +1,24 @@
 import React from 'react'
 
 interface DeleteModalProps {
-    isVisible: boolean; 
-    onClose: () => void; 
+    isVisible: boolean;
+    onClose: () => void;
+    onConfirm: (jokeId: string) => Promise<void>; 
+    isDeleting: boolean;
+    jokeId: string; 
   }
 
-const DeleteModal: React.FC<DeleteModalProps>  = ({ isVisible, onClose }) => {
+const DeleteModal: React.FC<DeleteModalProps>  = ({ isVisible, onClose, onConfirm, isDeleting, jokeId }) => {
     if (!isVisible) return null;
+
+    const handleDelete = async () => {
+      try {
+          await onConfirm(jokeId); 
+      } catch (error) {
+          console.error("Failed to delete:", error);
+      }
+  };
+
   return (
     <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center pl-[50px] py-[50px] z-10 items-center'>
         <div className='flex flex-col border h-[220px] rounded-[20px] px-[40px] py-[30px] justify-between bg-white'>
@@ -18,13 +30,17 @@ const DeleteModal: React.FC<DeleteModalProps>  = ({ isVisible, onClose }) => {
                 <div>
                     <button 
                     className='border border-black text-center items-center px-4 py-[7px] font-semibold rounded-[5px] text-[14px]'
-                    onClick={onClose}>
+                    onClick={onClose}
+                    disabled={isDeleting}>
                         No, I'm not
                     </button>
                 </div>
                 
                 <div>
-                    <button className="bg-activeNav border text-white px-4 py-2 rounded-[5px] text-[14px] font-semibold" onClick={onClose}>
+                    <button 
+                        className="bg-activeNav border text-white px-4 py-2 rounded-[5px] text-[14px] font-semibold" 
+                        onClick={handleDelete}
+                        disabled={isDeleting}>
                     Yes, I'm sure
                     </button>
                 </div>

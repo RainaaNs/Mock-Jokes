@@ -2,7 +2,7 @@ import { useState } from "react";
 import background from "../assets/background.jpg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Cookies from "universal-cookie";
-import { Link } from "react-router-dom"; // Use this if you're using React Router for navigation
+import { Link, useNavigate  } from "react-router-dom"; // Use this if you're using React Router for navigation
 import Navbar from "../components/Navbar";
 
 const cookies = new Cookies();
@@ -11,6 +11,8 @@ const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const navigate = useNavigate();
+
 
   function loginUser() {
     try {
@@ -29,9 +31,12 @@ const Login = () => {
           if (!data.error) {
             cookies.set("USER-TOKEN", data.token, { path: "/" });
             cookies.set("USER-ID", data.user.id, { path: "/" });
-            let location = ''
-            location = (username === 'admin') ? 'dashboard' : 'homepage'
-            window.location.href = location;
+
+            if (username.toLowerCase() === 'admin') {
+              navigate('/dashboard');
+            } else {
+              navigate('/homepage');
+            }
           } else {
             alert(data.error);
           }

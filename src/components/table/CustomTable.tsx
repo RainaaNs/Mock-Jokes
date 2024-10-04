@@ -44,8 +44,7 @@ const CustomTable = <T extends object>({
           {onAddButtonClick && (
             <button
               className="py-2 px-8 rounded-md border text-base hover:bg-gray-100"
-              onClick={() => { onAddButtonClick();}}
-              
+              onClick={() => { onAddButtonClick()}}
             >
               {addButtonLabel || 'Add'}
             </button>

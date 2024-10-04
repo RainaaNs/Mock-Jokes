@@ -3,16 +3,17 @@ import CustomTable from "./CustomTable"; // Reusable component
 import { jokeColumns } from "./columns"; // Import joke-specific columns
 import AddModal from "../AddModal";
 import DeleteModal from "../DeleteModal";
-import { Joke, useFetchJokes } from "../hooks/usersQL";
+import { Joke, useFetchJokes, useDeleteJoke } from "../hooks/usersQL";
 
 const JokeTable = () => {
-  const { jokes, loading,
-    //  refetch 
-    } = useFetchJokes();
+  const { jokes, loading, refetch } = useFetchJokes();
+  const [selectedJokeId, setSelectedJokeId] = useState<string>("");
+  const { removeJoke, loading: deleteLoading } = useDeleteJoke(selectedJokeId);
+  console.log("Jokes", jokes);
 
   const [filterText, setFilterText] = useState("");
 
-  const [filteredData, setFilteredData] = useState<Joke[]>(jokes);
+  const [filteredData, setFilteredData] = useState<Joke[]>([]);
   const [selectedJoke, setSelectedJoke] = useState<Joke | null>(null);
 
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
@@ -20,10 +21,22 @@ const JokeTable = () => {
   const [isUpdateModalVisible, setIsUpdateModalVisible] = useState(false);
 
   const openAddModal = () => setIsAddModalVisible(true);
-  const closeAddModal = () => setIsAddModalVisible(false);
+  const closeAddModal = () => {
+    refetch();
+    setIsAddModalVisible(false);
+  };
 
-  const openDeleteModal = () => setIsDeleteModalVisible(true);
-  const closeDeleteModal = () => setIsDeleteModalVisible(false);
+  const openDeleteModal = (joke: Joke) => {
+    setSelectedJoke(joke);
+    setSelectedJokeId(joke.id);
+    setIsDeleteModalVisible(true);
+  };
+
+  const closeDeleteModal = () => {
+    setSelectedJoke(null);
+    setSelectedJokeId("");
+    setIsDeleteModalVisible(false);
+  };
 
   const openUpdateModal = (row: Joke) => {
     setSelectedJoke(row);
@@ -31,9 +44,21 @@ const JokeTable = () => {
   };
 
   const closeUpdateModal = () => {
-    // refetch();
+    refetch();
     setSelectedJoke(null);
     setIsUpdateModalVisible(false);
+  };
+
+  const handleDelete = async () => {
+    if (selectedJoke) {
+      try {
+        await removeJoke();
+        await refetch();
+        closeDeleteModal();
+      } catch (error) {
+        console.error("Failed to delete joke:", error);
+      }
+    }
   };
 
   const columns = jokeColumns({
@@ -41,33 +66,18 @@ const JokeTable = () => {
     openUpdateModal,
   });
 
-  // useEffect(() => {
-  //   if (!loading && jokes) {
-  //     setData(jokes);
-  //   }
-  // }, [jokes, loading]);
-
-  // useEffect(() => {
-  //   setFilteredData(
-  //     data.filter(
-  //       (item) =>
-  //         item.title.toLowerCase().includes(filterText.toLowerCase()) ||
-  //         item.content.toLowerCase().includes(filterText.toLowerCase())
-  //     )
-  //   );
-  // }, [data, filterText]);
-
   useEffect(() => {
     if (!loading && jokes) {
       setFilteredData(
         jokes.filter(
           (item) =>
-            item.title.toLowerCase().includes(filterText.toLowerCase()) ||
-            item.content.toLowerCase().includes(filterText.toLowerCase())
+            item?.title?.toLowerCase().includes(filterText.toLowerCase()) ||
+            item?.content?.toLowerCase().includes(filterText.toLowerCase())
         )
       );
     }
-  }, [jokes, loading, filterText]);
+    // eslint-disable-next-line
+  }, [loading, filterText]);
 
   if (loading)
     return (
@@ -87,13 +97,13 @@ const JokeTable = () => {
         addButtonLabel="Add Joke"
         onAddButtonClick={openAddModal}
       />
-      <AddModal 
-        isVisible={isAddModalVisible} 
-        onClose={closeAddModal} 
-      />
+      <AddModal isVisible={isAddModalVisible} onClose={closeAddModal} />
       <DeleteModal
         isVisible={isDeleteModalVisible}
         onClose={closeDeleteModal}
+        onConfirm={handleDelete}
+        isDeleting={deleteLoading}
+        jokeId={selectedJokeId}
       />
       (
       {selectedJoke && (
